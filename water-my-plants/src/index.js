@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { plantReducer } from './reducers';
 
+// ?? Set up state using createStore (apply middleware used for thunk)
+const store = createStore(plantReducer, applyMiddleware(thunk));
+
+// ?? Wrap App.js in Provider, using store as props
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<Provider store={store}>
+			<App />
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
