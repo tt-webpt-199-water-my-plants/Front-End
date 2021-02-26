@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default function LogInForm(props) {
   const {
@@ -50,11 +50,9 @@ export default function LogInForm(props) {
           </button>
         </form>
         <h3>or</h3>
-        <Router>
           <button>Sign Up
             <Link to='/signup'/>
           </button>
-        </Router>
       </section>
     </div>
   )
