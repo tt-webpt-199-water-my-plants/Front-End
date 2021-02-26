@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 import Signup from './components/Signup';
+import Plants from './components/Plants';
 
 function App() {
 	return (
@@ -24,7 +25,7 @@ function App() {
           <Signup />
         </Route>
         <Route exact path="/">
-          
+          <Plants />
         </Route>
       </Switch>
     </div>
