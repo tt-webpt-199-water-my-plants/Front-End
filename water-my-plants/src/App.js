@@ -1,4 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
+import AddPlants from './components/AddPlant';
+import Login from './components/Login';
 import Signup from './components/Signup';
 
 function App() {
@@ -12,13 +14,13 @@ function App() {
           
         </Route>
         <Route path="/plants/add">
-          
+          <AddPlants />
         </Route>
         <Route path="/plants">
           
         </Route>
         <Route path="/login">
-          
+          <Login />          
         </Route>
         <Route path="/signup">
           <Signup />
