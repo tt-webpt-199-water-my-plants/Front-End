@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 
 const initialForm = {
@@ -39,7 +40,7 @@ function Signup() {
             />
             <div>
                 <p>Already have an account?</p>
-                <p><a href="/login">Log In</a></p>
+                <p><Link to="/login">Log In</Link></p>
             </div>
         </div>
     )
