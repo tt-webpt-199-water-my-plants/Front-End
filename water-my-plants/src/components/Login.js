@@ -1,30 +1,45 @@
-import React, { useState } from 'react'
-import LoginForm from './LoginForm'
+import axios from 'axios';
+import React, { useState } from 'react';
+import LoginForm from './LoginForm';
+import { useHistory } from 'react-router-dom';
 
 const initialLogIn = {
-  username: '',
-  password: ''
-}
+	username: '',
+	password: '',
+};
 
 export default function LogIn() {
-  const [logInData, setLogInData] = useState(initialLogIn)
+	const [logInData, setLogInData] = useState(initialLogIn);
 
-  const inputChange = (name, value) => {
-    setLogInData({...logInData, [name]: value})
-  }
+	const history = useHistory();
 
-  const formSubmit = () => {
-      // login function
-  }
+	const inputChange = (name, value) => {
+		setLogInData({ ...logInData, [name]: value });
+	};
 
+	const formSubmit = (e) => {
+		// ?? login function
+		axios.post(
+			'https://water-my-plants-api-t199.herokuapp.com/api/auth/login',
+			logInData
+		)
+			.then((res) => {
+				console.log('login data =====> ', res);
+				localStorage.setItem('token', res.data.payload);
+				history.push('protected');
+			})
+			.catch((err) => console.error('error logging in', err.message));
+	};
 
-  return (
-    <div className='wrapper'>
-      <LoginForm 
-        value={logInData}
-        change={inputChange}
-        submit={formSubmit}
-      />
-    </div>
-  )
+	console.log('Login: logInData =====> ', logInData);
+
+	return (
+		<div className="wrapper">
+			<LoginForm
+				logInData={logInData}
+				inputChange={inputChange}
+				formSubmit={formSubmit}
+			/>
+		</div>
+	);
 }
