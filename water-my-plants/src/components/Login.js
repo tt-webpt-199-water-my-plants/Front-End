@@ -26,7 +26,7 @@ export default function LogIn() {
 			.then((res) => {
 				console.log('login data =====> ', res);
 				localStorage.setItem('token', res.data.payload);
-				history.push('protected');
+				history.push('/plants');
 			})
 			.catch((err) => console.error('error logging in', err.message));
 	};

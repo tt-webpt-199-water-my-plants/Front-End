@@ -25,7 +25,7 @@ function Signup() {
 			form
 		)
 			.then((res) => {
-				console.log('returned data from post =====> ', res.data);
+				console.log('returned data from post =====> ', res);
 				history.push('/login');
 			})
 			.catch((err) =>
