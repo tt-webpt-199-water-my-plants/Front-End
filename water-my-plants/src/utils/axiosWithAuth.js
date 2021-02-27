@@ -9,7 +9,7 @@ const axiosWithAuth = () => {
 			authorization: token,
 		},
 		// ?? placeholder address
-		baseURL: 'http://localhost:5000/api',
+		baseURL: 'https://water-my-plants-api-t199.herokuapp.com/api',
 	});
 };
 
