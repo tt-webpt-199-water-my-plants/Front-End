@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import UserForm from './UserForm';
+import Navigation from './Navigation';
 
 const initialForm = {
     username: "",
@@ -41,6 +42,7 @@ function EditProfile() {
                 handleSubmit={handleSubmit}
                 buttonText="Submit"
             />
+            <Navigation />
         </div>
     )
 }
