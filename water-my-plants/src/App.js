@@ -1,8 +1,9 @@
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import Signup from './components/Signup';
 import LogIn from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Plants from './components/Plants';
+import EditProfile from './components/EditProfile';
 
 function App() {
 	return (
@@ -14,15 +15,17 @@ function App() {
 			</Link>
 
 			<Switch>
-				<PrivateRoute exact path="/profile"></PrivateRoute>
+				<PrivateRoute exact path="/profile">
+					<EditProfile />
+				</PrivateRoute>
 
 				<Route path="/plants/:id/edit"></Route>
 
 				<Route path="/plants/add"></Route>
 
 				<PrivateRoute exact path="/plants">
-          <Plants />
-        </PrivateRoute>
+          			<Plants />
+        		</PrivateRoute>
 
 				<Route path="/login">
 					<LogIn />
@@ -32,7 +35,9 @@ function App() {
 					<Signup />
 				</Route>
 
-				<Route exact path="/"></Route>
+				<Route exact path="/">
+					<Redirect to="/plants" />
+				</Route>
 			</Switch>
 		</div>
 	);

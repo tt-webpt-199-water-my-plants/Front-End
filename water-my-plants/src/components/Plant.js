@@ -8,7 +8,7 @@ const Plant = (props) => {
             <img src={plantImage} />
             <div className="plant-content">
                 <p>{plant.nickname} <span>{plant.speciesName}</span></p>
-                <p>Watering Frequency: {plant.h20Frequency}</p>
+                <p>Watering Frequency: {plant.h20Frequency} days</p>
             </div>
             <button>x</button>
         </div>
