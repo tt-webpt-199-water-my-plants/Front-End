@@ -5,7 +5,7 @@ const Navigation = () => {
     return ( 
         <div>
             <nav>
-                <Link to="/">
+                <Link to="/plants">
                     <img src="/home-icon.png" />
                     <span>Home</span>
                 </Link>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserForm from './UserForm';
 
 const initialForm = {
@@ -27,6 +27,10 @@ function EditProfile() {
         event.preventDefault();
         submit();
     }
+
+    useEffect(() => {
+        // get user data and update form state with user's username, password, and phone number
+    }, []);
 
     return (
         <div>
