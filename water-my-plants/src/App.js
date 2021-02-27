@@ -3,6 +3,7 @@ import Signup from './components/Signup';
 import LogIn from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Plants from './components/Plants';
+import AddPlant from './components/AddPlant';
 
 function App() {
 	return (
@@ -16,13 +17,15 @@ function App() {
 			<Switch>
 				<PrivateRoute exact path="/profile"></PrivateRoute>
 
-				<Route path="/plants/:id/edit"></Route>
+				<PrivateRoute path="/plants/:id/edit"></PrivateRoute>
 
-				<Route path="/plants/add"></Route>
+				<PrivateRoute path="/plants/add">
+					<AddPlant />
+				</PrivateRoute>
 
 				<PrivateRoute exact path="/plants">
-          <Plants />
-        </PrivateRoute>
+					<Plants />
+				</PrivateRoute>
 
 				<Route path="/login">
 					<LogIn />
