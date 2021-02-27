@@ -2,6 +2,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import Signup from './components/Signup';
 import LogIn from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
+import Plants from './components/Plants';
 
 function App() {
 	return (
@@ -19,7 +20,9 @@ function App() {
 
 				<Route path="/plants/add"></Route>
 
-				<PrivateRoute exact path="/plants"></PrivateRoute>
+				<PrivateRoute exact path="/plants">
+          <Plants />
+        </PrivateRoute>
 
 				<Route path="/login">
 					<LogIn />

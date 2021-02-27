@@ -48,10 +48,11 @@ export default function LogInForm(props) {
 					<button>Log In</button>
 				</form>
 				<h3>or</h3>
-				<button>
-					Sign Up
-					<Link to="/signup" />
-				</button>
+				<Link to="/signup">
+					<button>
+						Sign Up
+					</button>
+				</Link>
 			</section>
 		</div>
 	);
