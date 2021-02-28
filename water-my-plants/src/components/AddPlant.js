@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { addNewPlant } from '../actions';
 
-const AddPlant = (props, { plants, isLoading, error }) => {
+const AddPlant = (props) => {
 	const initialState = {
 		id: Date.now(),
 		nickname: '',
@@ -12,17 +12,6 @@ const AddPlant = (props, { plants, isLoading, error }) => {
 	};
 
 	const [state, setState] = useState(initialState);
-	// class AddPlant extends React.Component {
-	// 	constructor() {
-	// 		super();
-	// 		this.state = {
-	// 			id: Date.now(),
-	// 			nickname: '',
-	// 			h2OFrequency: '',
-	// 			speciesName: '',
-	// 			image: null,
-	// 		};
-	// 	}
 
 	const handleChange = (e) => {
 		setState({ ...state, [e.target.name]: e.target.value });
@@ -95,15 +84,11 @@ const AddPlant = (props, { plants, isLoading, error }) => {
 						<input
 							type="file"
 							accept="image/*"
-							// multiple={false}
-							// value={state.image}
 							onChange={handleImageUpload}
 							ref={imageUploader}
 							style={{
 								display: 'none',
 							}}
-							// name="image"
-							// id="image"
 						/>
 						<div
 							className="preview-img"
@@ -129,6 +114,7 @@ const AddPlant = (props, { plants, isLoading, error }) => {
 					</div>
 					Click to upload Image
 				</div>
+				<button>Submit Plant</button>
 			</form>
 		</section>
 	);
