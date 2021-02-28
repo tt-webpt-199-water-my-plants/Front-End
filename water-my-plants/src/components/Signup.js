@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 
 const initialForm = {
+	id: Date.now(),
 	username: '',
 	password: '',
 	phoneNumber: '',
