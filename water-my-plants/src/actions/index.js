@@ -19,7 +19,7 @@ export const getPlantData = () => {
 		// ?? axiosWithAuth().get
 		axiosWithAuth()
 			// ?? endpoint
-			.get('https://water-my-plants-api-t199.herokuapp.com/api/plants')
+			.get('/plants')
 			.then((res) => {
 				console.log('Plant data pulled from API =====> ', res);
 				dispatch({ type: FETCH_PLANT_DATA, payload: res.data });
@@ -39,10 +39,7 @@ export const addNewPlant = (plant) => {
 		// ?? axiosWithAuth().post
 		axiosWithAuth()
 			// ?? endpoint
-			.post(
-				'https://water-my-plants-api-t199.herokuapp.com/api/plants/new-plants',
-				plant
-			)
+			.post('/plants/new-plants', plant)
 			.then((res) => {
 				console.log('Plant data added to API =====> ', plant);
 				dispatch({ type: ADD_SUCCESS, payload: res.data });
