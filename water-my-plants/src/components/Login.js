@@ -1,4 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import { useHistory } from 'react-router-dom';
@@ -14,18 +15,23 @@ export default function LogIn() {
 	const history = useHistory();
 
 	const inputChange = (name, value) => {
-		setLogInData({ ...logInData, [name]: value });
+		const userData = { ...logInData, [name]: value };
+
+		setLogInData(userData);
 	};
 
 	const formSubmit = (e) => {
 		// ?? login function
-		axios.post(
-			'https://water-my-plants-api-t199.herokuapp.com/api/auth/login',
-			logInData
-		)
+		axiosWithAuth()
+			.post(
+				'https://water-my-plants-api-t199.herokuapp.com/api/auth/login',
+				logInData
+			)
 			.then((res) => {
-				localStorage.setItem('token', res.data.payload);
-				history.push('/plants');
+				console.log('token =====> ', res.data.token);
+				localStorage.setItem('token', res.data.token);
+
+				// history.push('/plants');
 			})
 			.catch((err) => console.error('error logging in', err.message));
 	};

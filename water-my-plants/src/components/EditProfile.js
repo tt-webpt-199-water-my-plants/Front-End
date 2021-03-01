@@ -22,6 +22,8 @@ function EditProfile(props) {
 	const { id } = useParams();
 	const history = useHistory();
 
+	console.log('id =====> ', props.id);
+
 	const update = (name, value) => {
 		setForm({ ...form, [name]: value });
 	};
@@ -30,7 +32,7 @@ function EditProfile(props) {
 		// ?? get user data and update form state with user's username, password, and phone number
 		// axios
 		axiosWithAuth()
-			.get(`/auth/${id}`)
+			.get(`/auth`)
 			.then((res) => {
 				setForm(res.data);
 			})
@@ -60,7 +62,7 @@ function EditProfile(props) {
 		// ?? use axios to post put/update data for the current user
 		// axios
 		axiosWithAuth()
-			.put(`/auth/edit-user/${id}`, newUserData)
+			.put(`/auth/edit-user/:id/`, newUserData)
 			.then((res) => {
 				// props.getUserInfo();
 				history.push('/');
