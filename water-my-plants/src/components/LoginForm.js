@@ -40,7 +40,7 @@ export default function LogInForm(props) {
 								value={logInData.password}
 								onChange={onChange}
 								name="password"
-								type="text"
+								type="password"
 								placeholder="Password"
 							/>
 						</label>
@@ -49,9 +49,7 @@ export default function LogInForm(props) {
 				</form>
 				<h3>or</h3>
 				<Link to="/signup">
-					<button>
-						Sign Up
-					</button>
+					<button>Sign Up</button>
 				</Link>
 			</section>
 		</div>

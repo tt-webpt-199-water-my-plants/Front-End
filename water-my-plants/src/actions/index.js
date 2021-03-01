@@ -18,8 +18,8 @@ export const getPlantData = () => {
 
 		// ?? axiosWithAuth().get
 		axiosWithAuth()
-			// ?? placeholder endpoint
-			.get('placeholder')
+			// ?? endpoint
+			.get('/plants')
 			.then((res) => {
 				console.log('Plant data pulled from API =====> ', res);
 				dispatch({ type: FETCH_PLANT_DATA, payload: res.data });
@@ -38,8 +38,8 @@ export const addNewPlant = (plant) => {
 
 		// ?? axiosWithAuth().post
 		axiosWithAuth()
-			// ?? placeholder endpoint
-			.post('placeholder', plant)
+			// ?? endpoint
+			.post('/plants/new-plants', plant)
 			.then((res) => {
 				console.log('Plant data added to API =====> ', plant);
 				dispatch({ type: ADD_SUCCESS, payload: res.data });

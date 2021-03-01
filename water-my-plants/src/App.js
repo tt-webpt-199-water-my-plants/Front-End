@@ -1,11 +1,31 @@
-import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Route, Switch, Link, Redirect, useParams } from 'react-router-dom';
+import axiosWithAuth from './utils/axiosWithAuth';
+// import axios from 'axios';
 import Signup from './components/Signup';
 import LogIn from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Plants from './components/Plants';
 import EditProfile from './components/EditProfile';
+import AddPlant from './components/AddPlant';
 
 function App() {
+	// const [userInfo, setUserInfo] = useState([]);
+	// const { id } = useParams();
+
+	// const getUserInfo = () => {
+	// 	axiosWithAuth()
+	// 		.get(`/auth/${id}`)
+	// 		.then((res) => {
+	// 			setUserInfo(res.data);
+	// 		})
+	// 		.catch((err) => console.error(err.message));
+	// };
+
+	// useEffect(() => {
+	// 	getUserInfo();
+	// }, [getUserInfo]);
+
 	return (
 		<div className="App">
 			<Link to="/signup">Register</Link>
@@ -16,16 +36,21 @@ function App() {
 
 			<Switch>
 				<PrivateRoute exact path="/profile">
-					<EditProfile />
+					<EditProfile
+					// userInfo={userInfo}
+					// getUserInfo={getUserInfo}
+					/>
 				</PrivateRoute>
 
-				<Route path="/plants/:id/edit"></Route>
+				<PrivateRoute path="/plants/:id/edit"></PrivateRoute>
 
-				<Route path="/plants/add"></Route>
+				<PrivateRoute path="/plants/add">
+					<AddPlant />
+				</PrivateRoute>
 
 				<PrivateRoute exact path="/plants">
-          			<Plants />
-        		</PrivateRoute>
+					<Plants />
+				</PrivateRoute>
 
 				<Route path="/login">
 					<LogIn />
