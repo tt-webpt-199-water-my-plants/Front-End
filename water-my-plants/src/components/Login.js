@@ -24,7 +24,6 @@ export default function LogIn() {
 			logInData
 		)
 			.then((res) => {
-				console.log('login data =====> ', res);
 				localStorage.setItem('token', res.data.payload);
 				history.push('/plants');
 			})
