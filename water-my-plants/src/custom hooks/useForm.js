@@ -1,7 +1,7 @@
 import useLocalStorage from './sessionStorage';
 
 const useForm = (initialValue) => {
-	const [values, setValues] = useLocalStorage('form', initialValues);
+	const [values, setValues] = useLocalStorage('form', initialValue);
 
 	const handleChanges = (e) => {
 		setValues({
