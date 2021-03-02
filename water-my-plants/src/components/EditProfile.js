@@ -62,7 +62,10 @@ function EditProfile(props) {
 		// ?? use axios to post put/update data for the current user
 		// axios
 		axiosWithAuth()
-			.put(`/auth/edit-user/:id/`, newUserData)
+			.put(
+				`/auth/edit-user/${localStorage.getItem('id')}`,
+				newUserData
+			)
 			.then((res) => {
 				// props.getUserInfo();
 				history.push('/');

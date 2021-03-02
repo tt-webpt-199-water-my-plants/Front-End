@@ -10,35 +10,45 @@ import EditProfile from './components/EditProfile';
 import AddPlant from './components/AddPlant';
 
 function App() {
-	const [userInfo, setUserInfo] = useState([]);
-	const { id } = useParams();
+	// const [userInfo, setUserInfo] = useState([]);
+	// const { id } = useParams();
 
-	const getUserInfo = () => {
-		axiosWithAuth()
-			.get(`/auth/${id}`)
-			.then((res) => {
-				setUserInfo(res.data);
-			})
-			.catch((err) => console.error(err.message));
+	// const getUserInfo = () => {
+	// 	axiosWithAuth()
+	// 		.get(`/auth/${id}`)
+	// 		.then((res) => {
+	// 			setUserInfo(res.data);
+	// 		})
+	// 		.catch((err) => console.error(err.message));
+	// };
+
+	// useEffect(() => {
+	// 	getUserInfo();
+	// }, [getUserInfo]);
+
+	const clearLocalStorage = () => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('id');
 	};
-
-	useEffect(() => {
-		getUserInfo();
-	}, [getUserInfo]);
 
 	return (
 		<div className="App">
 			<Link to="/signup">Register</Link>
 			<Link to="/login">Log In</Link>
-			<Link to="/login" onClick={localStorage.removeItem('token')}>
+			<Link
+				to="/login"
+				onClick={() => {
+					clearLocalStorage();
+				}}
+			>
 				Log Out
 			</Link>
 
 			<Switch>
 				<PrivateRoute exact path="/profile">
 					<EditProfile
-						userInfo={userInfo}
-						getUserInfo={getUserInfo}
+					// userInfo={userInfo}
+					// getUserInfo={getUserInfo}
 					/>
 				</PrivateRoute>
 
