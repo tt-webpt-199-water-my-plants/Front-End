@@ -22,7 +22,7 @@ function EditProfile(props) {
 	const { id } = useParams();
 	const history = useHistory();
 
-	console.log('id =====> ', props.id);
+	console.log('id =====> ', localStorage.getItem('id'));
 
 	const update = (name, value) => {
 		setForm({ ...form, [name]: value });
@@ -36,6 +36,7 @@ function EditProfile(props) {
 			.then((res) => {
 				setForm(res.data);
 			})
+
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
 			);
