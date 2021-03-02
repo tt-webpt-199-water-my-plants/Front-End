@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { addNewPlant } from '../actions';
 import styled from 'styled-components'
+import Navigation from './Navigation'
 
 const StyledAddPlant = styled.section`
 	width:60vw;
