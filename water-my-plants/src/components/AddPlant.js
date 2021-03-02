@@ -165,6 +165,7 @@ const AddPlant = (props) => {
 				</div>
 				<button>Submit Plant</button>
 			</form>
+			<Navigation />
 		</StyledAddPlant>
 	);
 };

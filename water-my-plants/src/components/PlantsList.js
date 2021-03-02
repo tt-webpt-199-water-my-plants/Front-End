@@ -3,28 +3,27 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 import Plant from './Plant';
 
 const PlantsList = () => {
-    const [plants, setPlants] = useState([]);
+	const [plants, setPlants] = useState([]);
 
-    const getPlants = () => {
-        axiosWithAuth().get('https://water-my-plants-api-t199.herokuapp.com/api/plants')
-        .then((response) => {
-            setPlants(response.data)
-        });
-    }
+	const getPlants = () => {
+		axiosWithAuth()
+			.get('https://water-my-plants-api-t199.herokuapp.com/api/plants')
+			.then((response) => {
+				setPlants(response.data);
+			});
+	};
 
-    useEffect(() => {
-        getPlants();
-    }, []);
+	useEffect(() => {
+		getPlants();
+	}, []);
 
-    return ( 
-        <div>
-            {
-                plants.map((plant) => {
-                    return <Plant plant={plant} key={plant.id} />
-                })
-            }
-        </div>
-     );
-}
- 
+	return (
+		<div>
+			{plants.map((plant) => {
+				return <Plant plant={plant} key={plant.id} />;
+			})}
+		</div>
+	);
+};
+
 export default PlantsList;
