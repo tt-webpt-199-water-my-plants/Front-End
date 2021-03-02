@@ -77,9 +77,8 @@ const StyledAddPlant = styled.section`
 
 const AddPlant = (props) => {
 	const initialState = {
-		id: Date.now(),
 		nickname: '',
-		h2OFrequency: '',
+		h20Frequency: '',
 		speciesName: '',
 		image: null,
 	};
@@ -111,10 +110,10 @@ const AddPlant = (props) => {
 		props.addNewPlant(state);
 
 		setState({
-			id: '',
 			nickname: '',
-			h2OFrequency: '',
+			h20Frequency: '',
 			speciesName: '',
+			userId: localStorage.getItem('id'),
 			image: null,
 		});
 	};
@@ -132,11 +131,11 @@ const AddPlant = (props) => {
 						placeholder="Nickname"
 					/>
 					<input
-						value={state.h2OFrequency}
+						value={state.h20Frequency}
 						onChange={handleChange}
-						name="h2OFrequency"
-						id="h2OFrequency"
-						placeholder="Watering Frequency"
+						name="h20Frequency"
+						id="h20Frequency"
+						placeholder="H2O Frequency"
 					/>
 					<input
 						value={state.speciesName}
