@@ -1,7 +1,8 @@
-import axios from 'axios';
+// import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const initialLogIn = {
 	username: '',
@@ -11,23 +12,47 @@ const initialLogIn = {
 export default function LogIn() {
 	const [logInData, setLogInData] = useState(initialLogIn);
 
-	const history = useHistory();
+	// const history = useHistory();
 
 	const inputChange = (name, value) => {
-		setLogInData({ ...logInData, [name]: value });
+		const userData = { ...logInData, [name]: value };
+
+		setLogInData(userData);
 	};
 
 	const formSubmit = (e) => {
+		// e.preventDefault();
 		// ?? login function
-		axios.post(
-			'https://water-my-plants-api-t199.herokuapp.com/api/auth/login',
-			logInData
-		)
+		axiosWithAuth()
+			.post(
+				'https://water-my-plants-api-t199.herokuapp.com/api/auth/login',
+				logInData
+			)
 			.then((res) => {
-				console.log('login data =====> ', res);
-				localStorage.setItem('token', res.data.payload);
-				history.push('/plants');
+				console.log('token =====> ', res.data.token);
+				localStorage.setItem('token', res.data.token);
+				const parseJwt = (token) => {
+					if (!token) {
+						return;
+					}
+					const base64Url = token.split('.')[1];
+					const base64 = base64Url
+						.replace('-', '+')
+						.replace('_', '/');
+					return JSON.parse(window.atob(base64));
+				};
+				console.log('token info =====> ', parseJwt(res.data.token));
+				localStorage.setItem(
+					'id',
+					parseJwt(res.data.token).subject
+				);
 			})
+			// .then((res) => {
+
+			// })
+			//* .then(() => {
+			//* 	history.push('/plants');
+			//* })
 			.catch((err) => console.error('error logging in', err.message));
 	};
 

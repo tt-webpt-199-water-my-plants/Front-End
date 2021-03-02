@@ -4,9 +4,10 @@ import Navigation from './Navigation';
 // import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useParams, useHistory } from 'react-router-dom';
+// import useForm from '../custom hooks/useForm';
 
 const initialForm = {
-	id: Date.now(),
+	// id: Date.now(),
 	username: '',
 	password: '',
 	phoneNumber: '',
@@ -14,9 +15,14 @@ const initialForm = {
 
 function EditProfile(props) {
 	const [form, setForm] = useState(initialForm);
+	// const [values, handleChanges, clearForm] = useForm(initialForm);
+
+	console.log('Edit Profile props =====> ', props);
 
 	const { id } = useParams();
 	const history = useHistory();
+
+	console.log('id =====> ', props.id);
 
 	const update = (name, value) => {
 		setForm({ ...form, [name]: value });
@@ -26,7 +32,7 @@ function EditProfile(props) {
 		// ?? get user data and update form state with user's username, password, and phone number
 		// axios
 		axiosWithAuth()
-			.get(`/auth/${id}`)
+			.get(`/auth`)
 			.then((res) => {
 				setForm(res.data);
 			})
@@ -56,15 +62,21 @@ function EditProfile(props) {
 		// ?? use axios to post put/update data for the current user
 		// axios
 		axiosWithAuth()
-			.put(`/auth/edit-user/${id}`, newUserData)
+			.put(
+				`/auth/edit-user/${localStorage.getItem('id')}`,
+				newUserData
+			)
 			.then((res) => {
-				props.getUserInfo();
+				// props.getUserInfo();
 				history.push('/');
+				// clearForm();
 			})
 			.catch((err) =>
 				console.error('unable to update user ', err.message)
 			);
 	};
+
+	console.log('newUserData =====> ', newUserData);
 
 	return (
 		<div>

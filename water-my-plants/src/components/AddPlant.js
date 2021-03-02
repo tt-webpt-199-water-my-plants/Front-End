@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { addNewPlant } from '../actions';
+import Navigation from '../components/Navigation';
 
 const AddPlant = (props) => {
 	const initialState = {
@@ -116,6 +117,7 @@ const AddPlant = (props) => {
 				</div>
 				<button>Submit Plant</button>
 			</form>
+			<Navigation />
 		</section>
 	);
 };

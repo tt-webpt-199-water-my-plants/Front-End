@@ -1,12 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function LogInForm(props) {
 	const { logInData, inputChange, formSubmit } = props;
 
+	const history = useHistory();
+
 	const onSubmit = (evt) => {
 		evt.preventDefault();
 		formSubmit();
+		history.push('/plants');
 	};
 
 	const onChange = (evt) => {

@@ -26,11 +26,21 @@ function App() {
 	// 	getUserInfo();
 	// }, [getUserInfo]);
 
+	const clearLocalStorage = () => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('id');
+	};
+
 	return (
 		<div className="App">
 			<Link to="/signup">Register</Link>
 			<Link to="/login">Log In</Link>
-			<Link to="/login" onClick={localStorage.removeItem('token')}>
+			<Link
+				to="/login"
+				onClick={() => {
+					clearLocalStorage();
+				}}
+			>
 				Log Out
 			</Link>
 
