@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import UserForm from './UserForm';
 import Navigation from './Navigation';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const initialForm = {
 	username: '',
@@ -10,15 +10,11 @@ const initialForm = {
 	phoneNumber: '',
 };
 
-function EditProfile(props) {
+function EditProfile() {
 	const [form, setForm] = useState(initialForm);
+	const [formTwo, setFormTwo] = useState([]);
 
-	console.log('Edit Profile props =====> ', props);
-
-	const { id } = useParams();
 	const history = useHistory();
-
-	console.log('id =====> ', props.id);
 
 	const update = (name, value) => {
 		setForm({ ...form, [name]: value });
@@ -30,11 +26,12 @@ function EditProfile(props) {
 			.get(`/auth`)
 			.then((res) => {
 				setForm(res.data);
+				setFormTwo(res.data);
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
 			);
-	}, [id]);
+	}, []);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -47,11 +44,16 @@ function EditProfile(props) {
 	};
 
 	const newUserData = {
-		...form,
+		// ...form,
 		username: form.username,
 		password: form.password,
 		phoneNumber: form.phoneNumber,
+		id: localStorage.getItem('id'),
 	};
+
+	console.log('newUserData =====> ', newUserData);
+	console.log('form =====> ', form);
+	console.log('formTwo =====> ', formTwo);
 
 	const submit = () => {
 		// ?? use axios to post put/update data for the current user
@@ -61,16 +63,21 @@ function EditProfile(props) {
 				newUserData
 			)
 			.then((res) => {
-				// props.getUserInfo();
 				history.push('/');
-				// clearForm();
 			})
 			.catch((err) =>
 				console.error('unable to update user ', err.message)
 			);
 	};
 
-	console.log('newUserData =====> ', newUserData);
+	const formFilter = formTwo.filter(
+		(user) => user.id == localStorage.getItem('id')
+	);
+
+	const currentUserData = formFilter[0];
+
+	console.log('formFilter =====> ', formFilter);
+	console.log('currentUserData =====> ', currentUserData);
 
 	return (
 		<div>

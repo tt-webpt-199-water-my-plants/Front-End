@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Route, Switch, Link, Redirect, useParams } from 'react-router-dom';
-import axiosWithAuth from './utils/axiosWithAuth';
-// import axios from 'axios';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
+
 import Signup from './components/Signup';
 import LogIn from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
@@ -27,33 +25,24 @@ function App() {
 			>
 				Log Out
 			</Link>
-			<p>Current User: {localStorage.getItem('user')}</p>
+			<p>Hello, {localStorage.getItem('user')}</p>
 
 			<Switch>
-				<PrivateRoute exact path="/profile">
-					<EditProfile
-					// userInfo={userInfo}
-					// getUserInfo={getUserInfo}
-					/>
-				</PrivateRoute>
+				<PrivateRoute
+					exact
+					path="/profile"
+					component={EditProfile}
+				/>
 
 				<PrivateRoute path="/plants/:id/edit"></PrivateRoute>
 
-				<PrivateRoute path="/plants/add">
-					<AddPlant />
-				</PrivateRoute>
+				<PrivateRoute path="/plants/add" component={AddPlant} />
 
-				<PrivateRoute exact path="/plants">
-					<Plants />
-				</PrivateRoute>
+				<PrivateRoute exact path="/plants" component={Plants} />
 
-				<Route path="/login">
-					<LogIn />
-				</Route>
+				<Route path="/login" component={LogIn} />
 
-				<Route path="/signup">
-					<Signup />
-				</Route>
+				<Route path="/signup" component={Signup} />
 
 				<Route exact path="/">
 					<Redirect to="/plants" />
