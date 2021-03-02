@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import UserForm from './UserForm';
 import Navigation from './Navigation';
-// import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useParams, useHistory } from 'react-router-dom';
-// import useForm from '../custom hooks/useForm';
 
 const initialForm = {
-	// id: Date.now(),
 	username: '',
 	password: '',
 	phoneNumber: '',
@@ -15,7 +12,6 @@ const initialForm = {
 
 function EditProfile(props) {
 	const [form, setForm] = useState(initialForm);
-	// const [values, handleChanges, clearForm] = useForm(initialForm);
 
 	console.log('Edit Profile props =====> ', props);
 
@@ -30,7 +26,6 @@ function EditProfile(props) {
 
 	useEffect(() => {
 		// ?? get user data and update form state with user's username, password, and phone number
-		// axios
 		axiosWithAuth()
 			.get(`/auth`)
 			.then((res) => {
@@ -60,7 +55,6 @@ function EditProfile(props) {
 
 	const submit = () => {
 		// ?? use axios to post put/update data for the current user
-		// axios
 		axiosWithAuth()
 			.put(
 				`/auth/edit-user/${localStorage.getItem('id')}`,

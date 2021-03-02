@@ -30,7 +30,9 @@ export default function LogIn() {
 			)
 			.then((res) => {
 				console.log('token =====> ', res.data.token);
+				// ?? Set 'token' to local storage
 				localStorage.setItem('token', res.data.token);
+				// ?? Translate token to user data {}
 				const parseJwt = (token) => {
 					if (!token) {
 						return;
@@ -42,9 +44,15 @@ export default function LogIn() {
 					return JSON.parse(window.atob(base64));
 				};
 				console.log('token info =====> ', parseJwt(res.data.token));
+				// ?? Set 'id' to local storage
 				localStorage.setItem(
 					'id',
 					parseJwt(res.data.token).subject
+				);
+				// ?? set 'user' to local storage
+				localStorage.setItem(
+					'user',
+					parseJwt(res.data.token).username
 				);
 			})
 			// .then((res) => {

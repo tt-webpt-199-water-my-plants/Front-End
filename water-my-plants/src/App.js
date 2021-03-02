@@ -10,22 +10,6 @@ import EditProfile from './components/EditProfile';
 import AddPlant from './components/AddPlant';
 
 function App() {
-	// const [userInfo, setUserInfo] = useState([]);
-	// const { id } = useParams();
-
-	// const getUserInfo = () => {
-	// 	axiosWithAuth()
-	// 		.get(`/auth/${id}`)
-	// 		.then((res) => {
-	// 			setUserInfo(res.data);
-	// 		})
-	// 		.catch((err) => console.error(err.message));
-	// };
-
-	// useEffect(() => {
-	// 	getUserInfo();
-	// }, [getUserInfo]);
-
 	const clearLocalStorage = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('id');
@@ -43,6 +27,7 @@ function App() {
 			>
 				Log Out
 			</Link>
+			<p>Current User: {localStorage.getItem('user')}</p>
 
 			<Switch>
 				<PrivateRoute exact path="/profile">
