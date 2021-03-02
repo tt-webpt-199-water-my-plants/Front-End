@@ -2,7 +2,7 @@
 import axiosWithAuth from '../utils/axiosWithAuth';
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const initialLogIn = {
 	username: '',
@@ -12,7 +12,7 @@ const initialLogIn = {
 export default function LogIn() {
 	const [logInData, setLogInData] = useState(initialLogIn);
 
-	// const history = useHistory();
+	const history = useHistory();
 
 	const inputChange = (name, value) => {
 		const userData = { ...logInData, [name]: value };
@@ -21,7 +21,6 @@ export default function LogIn() {
 	};
 
 	const formSubmit = (e) => {
-		// e.preventDefault();
 		// ?? login function
 		axiosWithAuth()
 			.post(
@@ -47,12 +46,9 @@ export default function LogIn() {
 					parseJwt(res.data.token).subject
 				);
 			})
-			// .then((res) => {
-
-			// })
-			//* .then(() => {
-			//* 	history.push('/plants');
-			//* })
+			.then(() => {
+				history.push('/plants');
+			})
 			.catch((err) => console.error('error logging in', err.message));
 	};
 

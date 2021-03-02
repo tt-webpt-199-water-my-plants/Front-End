@@ -15,6 +15,7 @@ const initialForm = {
 
 function EditProfile(props) {
 	const [form, setForm] = useState(initialForm);
+	const [newForm, setNewForm] = useState([]);
 	// const [values, handleChanges, clearForm] = useForm(initialForm);
 
 	console.log('Edit Profile props =====> ', props);
@@ -36,10 +37,17 @@ function EditProfile(props) {
 			.then((res) => {
 				setForm(res.data);
 			})
+			.then((res) => {
+				const formFilter = Object.filter(
+					form,
+					(id) => id === localStorage.getItem('id')
+				);
+				setNewForm(formFilter);
+			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
 			);
-	}, [id]);
+	}, []);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -52,10 +60,10 @@ function EditProfile(props) {
 	};
 
 	const newUserData = {
-		...form,
-		username: form.username,
-		password: form.password,
-		phoneNumber: form.phoneNumber,
+		...newForm,
+		username: newForm.username,
+		password: newForm.password,
+		phoneNumber: newForm.phoneNumber,
 	};
 
 	const submit = () => {
