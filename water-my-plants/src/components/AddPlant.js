@@ -112,7 +112,6 @@ const AddPlant = (props) => {
 			nickname: '',
 			h20Frequency: '',
 			speciesName: '',
-
 			image: null,
 			userId: localStorage.getItem('id'),
 		});

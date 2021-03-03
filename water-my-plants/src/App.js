@@ -8,12 +8,6 @@ import EditProfile from './components/EditProfile';
 import AddPlant from './components/AddPlant';
 
 function App() {
-	const clearLocalStorage = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem('id');
-		localStorage.removeItem('user');
-	};
-
 	return (
 		<div className="App">
 			<Link to="/signup">Register</Link>
@@ -21,7 +15,7 @@ function App() {
 			<Link
 				to="/login"
 				onClick={() => {
-					clearLocalStorage();
+					localStorage.clear();
 				}}
 			>
 				Log Out
