@@ -14,8 +14,6 @@ export default function LogInForm(props) {
 		inputChange(name, value);
 	};
 
-	console.log('LoginForm: logInData =====> ', logInData);
-
 	return (
 		<div>
 			<header>

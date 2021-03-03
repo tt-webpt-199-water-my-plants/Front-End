@@ -5,6 +5,11 @@ import Navigation from './Navigation';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useParams, useHistory } from 'react-router-dom';
 // import useForm from '../custom hooks/useForm';
+import styled from 'styled-components';
+
+const StyledEditProfile = styled.div`
+	padding-bottom: 150px;
+`;
 
 const initialForm = {
 	// id: Date.now(),
@@ -87,7 +92,7 @@ function EditProfile(props) {
 	console.log('newUserData =====> ', newUserData);
 
 	return (
-		<div>
+		<StyledEditProfile>
 			<h2>Edit Profile</h2>
 			<UserForm
 				form={form}
@@ -96,7 +101,7 @@ function EditProfile(props) {
 				buttonText="Submit"
 			/>
 			<Navigation />
-		</div>
+		</StyledEditProfile>
 	);
 }
 

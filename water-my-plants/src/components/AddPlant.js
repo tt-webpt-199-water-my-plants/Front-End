@@ -9,6 +9,7 @@ const StyledAddPlant = styled.section`
 	max-width:550px;
 	margin:auto;
 	text-align:center;
+	padding-bottom: 150px;
 
 	h1 {
 		font-size:2em;
@@ -73,6 +74,9 @@ const StyledAddPlant = styled.section`
 		max-height: 60px;
 
 	}
+	button:hover {
+		cursor: pointer;
+	}
 `
 
 const AddPlant = (props) => {
@@ -80,6 +84,7 @@ const AddPlant = (props) => {
 		nickname: '',
 		h20Frequency: '',
 		speciesName: '',
+		userId: localStorage.getItem('id'),
 		image: null,
 	};
 
@@ -119,54 +124,56 @@ const AddPlant = (props) => {
 	};
 
 	return (
-		<StyledAddPlant>
-			<h1>Add Plant</h1>
-			<form onSubmit={handleSubmit}>
-				<div className="newPlant form-group">
-					<input
-						value={state.nickname}
-						onChange={handleChange}
-						name="nickname"
-						id="nickname"
-						placeholder="Nickname"
-					/>
-					<input
-						value={state.h20Frequency}
-						onChange={handleChange}
-						name="h20Frequency"
-						id="h20Frequency"
-						placeholder="H2O Frequency"
-					/>
-					<input
-						value={state.speciesName}
-						onChange={handleChange}
-						name="speciesName"
-						id="speciesName"
-						placeholder="Species Name"
-					/>
-					<div className="img-button">
+		<div>
+			<StyledAddPlant>
+				<h1>Add Plant</h1>
+				<form onSubmit={handleSubmit}>
+					<div className="newPlant form-group">
 						<input
-							type="file"
-							accept="image/*"
-							onChange={handleImageUpload}
-							ref={imageUploader}
+							value={state.nickname}
+							onChange={handleChange}
+							name="nickname"
+							id="nickname"
+							placeholder="Nickname"
 						/>
-						<div
-							className="preview-img"
-							onClick={() => imageUploader.current.click()}
-						>
-							<img
-								ref={uploadedImage}
-								alt="flower"
+						<input
+							value={state.h20Frequency}
+							onChange={handleChange}
+							name="h20Frequency"
+							id="h20Frequency"
+							placeholder="H2O Frequency"
+						/>
+						<input
+							value={state.speciesName}
+							onChange={handleChange}
+							name="speciesName"
+							id="speciesName"
+							placeholder="Species Name"
+						/>
+						<div className="img-button">
+							<input
+								type="file"
+								accept="image/*"
+								onChange={handleImageUpload}
+								ref={imageUploader}
 							/>
+							<div
+								className="preview-img"
+								onClick={() => imageUploader.current.click()}
+							>
+								<img
+									ref={uploadedImage}
+									alt="flower"
+								/>
+							</div>
+							<p>Click to upload Image</p>
 						</div>
-						<p>Click to upload Image</p>
 					</div>
-				</div>
-				<button>Submit Plant</button>
-			</form>
+					<button>Submit Plant</button>
+				</form>
+			</StyledAddPlant>
 			<Navigation />
-		</StyledAddPlant>
+		</div>
 	);
 };
 
