@@ -3,6 +3,11 @@ import UserForm from './UserForm';
 import Navigation from './Navigation';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledEditProfile = styled.div`
+	padding-bottom: 150px;
+`;
 
 const initialForm = {
 	username: '',
@@ -79,7 +84,7 @@ function EditProfile() {
 	console.log('currentUserData =====> ', currentUserData);
 
 	return (
-		<div>
+		<StyledEditProfile>
 			<h2>Edit Profile</h2>
 			<UserForm
 				form={form}
@@ -88,7 +93,7 @@ function EditProfile() {
 				buttonText="Submit"
 			/>
 			<Navigation />
-		</div>
+		</StyledEditProfile>
 	);
 }
 

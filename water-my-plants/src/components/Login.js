@@ -51,9 +51,13 @@ const StyledLogin = styled.div`
 		background-color:white;
 		color:#a1a1a1;
 	}
+	button:hover {
+		cursor: pointer;
+	}
 `
 
-export default function LogIn() {
+export default function LogIn(props) {
+	const { setIsUserLoggedIn } = props;
 	const [logInData, setLogInData] = useState(initialLogIn);
 
 	const history = useHistory();
@@ -72,6 +76,7 @@ export default function LogIn() {
 				logInData
 			)
 			.then((res) => {
+				setIsUserLoggedIn(true);
 				console.log('token =====> ', res.data.token);
 				// ?? Set 'token' to local storage
 				localStorage.setItem('token', res.data.token);
@@ -103,8 +108,6 @@ export default function LogIn() {
 			})
 			.catch((err) => console.error('error logging in', err.message));
 	};
-
-	console.log('Login: logInData =====> ', logInData);
 
 	return (
 		<StyledLogin>
