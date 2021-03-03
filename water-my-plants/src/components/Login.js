@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
