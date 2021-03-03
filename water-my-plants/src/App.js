@@ -32,6 +32,11 @@ function App() {
 		localStorage.getItem('id') ? true : false
 	);
 
+	// const userName = () => {
+	// 	return localStorage.getItem('user');
+	// };
+	const [userName, setUserName] = useState([]);
+
 	const clearLocalStorage = () => {
 		localStorage.clear();
 		setIsUserLoggedIn(false);
@@ -42,7 +47,7 @@ function App() {
 			<StyledTopbar>
 				{isUserLoggedIn && (
 					<div>
-						<p>Hello, {localStorage.getItem('user')}! | </p>
+						<p>Hello, {userName}!</p>
 						<Link
 							to="/login"
 							onClick={() => {
@@ -71,7 +76,10 @@ function App() {
 				<PrivateRoute exact path="/plants" component={Plants} />
 
 				<Route path="/login">
-					<LogIn setIsUserLoggedIn={setIsUserLoggedIn} />
+					<LogIn
+						setIsUserLoggedIn={setIsUserLoggedIn}
+						setUserName={setUserName}
+					/>
 				</Route>
 
 				<Route path="/signup" component={Signup} />

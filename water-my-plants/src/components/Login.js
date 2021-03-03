@@ -11,53 +11,53 @@ const initialLogIn = {
 };
 
 const StyledLogin = styled.div`
-	width:60vw;
-	max-width:550px;
-	margin:auto;
-	display:flex;
-	justify-content:center;
-	align-content:space-between;
-	text-align:center;
+	width: 60vw;
+	max-width: 550px;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-content: space-between;
+	text-align: center;
 
 	section {
-		color:#a1a1a1;
-		font-size:1.2em;
+		color: #a1a1a1;
+		font-size: 1.2em;
 	}
 
 	.form-group label input {
-		font-size:1.2em;
-		width:100%;
+		font-size: 1.2em;
+		width: 100%;
 		background: transparent;
 		border: none;
 		border-bottom: 2px solid #a1a1a1;
-		visibility:visible;
+		visibility: visible;
 	}
-	
+
 	form .form-group label {
-		display:block;
-		visibility:hidden;
-		margin:10% 0;
+		display: block;
+		visibility: hidden;
+		margin: 10% 0;
 	}
 	button {
-		width:100%;
+		width: 100%;
 		padding: 4%;
-		font-size:1.5em;
-		border:none;
-		background-color:#a1a1a1;
-		color:white;
+		font-size: 1.5em;
+		border: none;
+		background-color: #a1a1a1;
+		color: white;
 	}
 	a button {
-		border:2px solid #a1a1a1;
-		background-color:white;
-		color:#a1a1a1;
+		border: 2px solid #a1a1a1;
+		background-color: white;
+		color: #a1a1a1;
 	}
 	button:hover {
 		cursor: pointer;
 	}
-`
+`;
 
 export default function LogIn(props) {
-	const { setIsUserLoggedIn } = props;
+	const { setIsUserLoggedIn, setUserName } = props;
 	const [logInData, setLogInData] = useState(initialLogIn);
 
 	const history = useHistory();
@@ -104,6 +104,7 @@ export default function LogIn(props) {
 				);
 			})
 			.then(() => {
+				setUserName(localStorage.getItem('user'));
 				history.push('/plants');
 			})
 			.catch((err) => console.error('error logging in', err.message));
