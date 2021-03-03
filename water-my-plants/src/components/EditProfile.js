@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import UserForm from './UserForm';
 import Navigation from './Navigation';
-// import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import { useParams, useHistory } from 'react-router-dom';
-// import useForm from '../custom hooks/useForm';
+import { useHistory } from 'react-router-dom';
 
 const initialForm = {
-	// id: Date.now(),
 	username: '',
 	password: '',
 	phoneNumber: '',
 };
 
-function EditProfile(props) {
+function EditProfile() {
 	const [form, setForm] = useState(initialForm);
-	const [newForm, setNewForm] = useState([]);
-	// const [values, handleChanges, clearForm] = useForm(initialForm);
+	const [formTwo, setFormTwo] = useState([]);
 
-	console.log('Edit Profile props =====> ', props);
-
-	const { id } = useParams();
 	const history = useHistory();
-
-	console.log('id =====> ', props.id);
 
 	const update = (name, value) => {
 		setForm({ ...form, [name]: value });
@@ -31,18 +22,11 @@ function EditProfile(props) {
 
 	useEffect(() => {
 		// ?? get user data and update form state with user's username, password, and phone number
-		// axios
 		axiosWithAuth()
 			.get(`/auth`)
 			.then((res) => {
 				setForm(res.data);
-			})
-			.then((res) => {
-				const formFilter = Object.filter(
-					form,
-					(id) => id === localStorage.getItem('id')
-				);
-				setNewForm(formFilter);
+				setFormTwo(res.data);
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
@@ -60,31 +44,39 @@ function EditProfile(props) {
 	};
 
 	const newUserData = {
-		...newForm,
-		username: newForm.username,
-		password: newForm.password,
-		phoneNumber: newForm.phoneNumber,
+		username: form.username,
+		password: form.password,
+		phoneNumber: form.phoneNumber,
+		id: localStorage.getItem('id'),
 	};
+
+	console.log('newUserData =====> ', newUserData);
+	console.log('form =====> ', form);
+	console.log('formTwo =====> ', formTwo);
 
 	const submit = () => {
 		// ?? use axios to post put/update data for the current user
-		// axios
 		axiosWithAuth()
 			.put(
 				`/auth/edit-user/${localStorage.getItem('id')}`,
 				newUserData
 			)
 			.then((res) => {
-				// props.getUserInfo();
 				history.push('/');
-				// clearForm();
 			})
 			.catch((err) =>
 				console.error('unable to update user ', err.message)
 			);
 	};
 
-	console.log('newUserData =====> ', newUserData);
+	const formFilter = formTwo.filter(
+		(user) => user.id == localStorage.getItem('id')
+	);
+
+	const currentUserData = formFilter[0];
+
+	console.log('formFilter =====> ', formFilter);
+	console.log('currentUserData =====> ', currentUserData);
 
 	return (
 		<div>

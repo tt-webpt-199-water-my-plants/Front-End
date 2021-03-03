@@ -7,8 +7,13 @@ const PlantsList = () => {
 
 	const getPlants = () => {
 		axiosWithAuth()
-			.get('https://water-my-plants-api-t199.herokuapp.com/api/plants')
+			.get(
+				`https://water-my-plants-api-t199.herokuapp.com/api/plants/${localStorage.getItem(
+					'id'
+				)}`
+			)
 			.then((response) => {
+				console.log('plants data - user =====> ', response.data);
 				setPlants(response.data);
 			});
 	};
