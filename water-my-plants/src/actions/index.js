@@ -39,7 +39,7 @@ export const addNewPlant = (plant) => {
 		// ?? axiosWithAuth().post
 		axiosWithAuth()
 			// ?? endpoint
-			.post('/plants/new-plants', plant)
+			.post(`/plants/new-plants`, plant)
 			.then((res) => {
 				console.log('Plant data added to API =====> ', plant);
 				dispatch({ type: ADD_SUCCESS, payload: res.data });
