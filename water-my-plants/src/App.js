@@ -33,6 +33,7 @@ function App() {
 	const clearLocalStorage = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('id');
+		localStorage.removeItem('user');
 		setIsUserLoggedIn(false);
 	};
 
@@ -41,14 +42,17 @@ function App() {
 			<StyledTopbar>
 				{
 					isUserLoggedIn &&
-					<Link
-						to="/login"
-						onClick={() => {
-							clearLocalStorage();
-						}}
-					>
-						Log Out
-					</Link>
+					<div>
+						<p>Hello, {localStorage.getItem('user')}! | </p>
+						<Link
+							to="/login"
+							onClick={() => {
+								clearLocalStorage();
+							}}
+						>
+							Log Out
+						</Link>
+					</div>
 				}
 				{
 					!isUserLoggedIn &&
@@ -58,7 +62,6 @@ function App() {
 					!isUserLoggedIn &&
 					<Link to="/signup">Register</Link>
 				}
-				
 			</StyledTopbar>
 
 			<Switch>

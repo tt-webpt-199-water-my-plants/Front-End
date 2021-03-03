@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { addNewPlant } from '../actions';
-import styled from 'styled-components'
-import Navigation from './Navigation'
+import styled from 'styled-components';
+import Navigation from './Navigation';
 
 const StyledAddPlant = styled.section`
 	width:60vw;
@@ -12,44 +12,44 @@ const StyledAddPlant = styled.section`
 	padding-bottom: 150px;
 
 	h1 {
-		font-size:2em;
+		font-size: 2em;
 	}
 
 	form {
-		width:100%;
-		margin:auto;
-		color:#a1a1a1;
-		font-size:1.2em;
+		width: 100%;
+		margin: auto;
+		color: #a1a1a1;
+		font-size: 1.2em;
 	}
 
 	.form-group input {
-		font-size:1.1em;
-		width:100%;
+		font-size: 1.1em;
+		width: 100%;
 		background: transparent;
 		border: none;
 		border-bottom: 2px solid #a1a1a1;
-		padding:12px 0;
-		visibility:visible;
+		padding: 12px 0;
+		visibility: visible;
 		margin: 6% 0;
 	}
 
 	form .form-group label {
-		display:block;
-		visibility:hidden;
-		margin:10% 0;
+		display: block;
+		visibility: hidden;
+		margin: 10% 0;
 	}
 	button {
-		width:100%;
+		width: 100%;
 		padding: 4%;
-		font-size:1.5em;
-		border:none;
-		background-color:#a1a1a1;
-		color:white;
+		font-size: 1.5em;
+		border: none;
+		background-color: #a1a1a1;
+		color: white;
 	}
 	a button {
-		border:2px solid #a1a1a1;
-		background-color:white;
-		color:#a1a1a1;
+		border: 2px solid #a1a1a1;
+		background-color: white;
+		color: #a1a1a1;
 	}
 	.img-button {
 		display: flex;
@@ -58,21 +58,20 @@ const StyledAddPlant = styled.section`
 		margin: 6% 0;
 	}
 	.img-button input {
-		display:none;
+		display: none;
 	}
 	.preview-img {
 		height: 60px;
 		width: 60px;
 		border: 1px dashed black;
-		cursor:pointer;
-		margin:0 6%
+		cursor: pointer;
+		margin: 0 6%;
 	}
 	.preview-img img {
 		width: 100%;
 		height: 100%;
 		max-width: 60px;
 		max-height: 60px;
-
 	}
 	button:hover {
 		cursor: pointer;
@@ -118,8 +117,9 @@ const AddPlant = (props) => {
 			nickname: '',
 			h20Frequency: '',
 			speciesName: '',
-			userId: localStorage.getItem('id'),
+
 			image: null,
+			userId: localStorage.getItem('id'),
 		});
 	};
 
@@ -150,23 +150,11 @@ const AddPlant = (props) => {
 							id="speciesName"
 							placeholder="Species Name"
 						/>
-						<div className="img-button">
-							<input
-								type="file"
-								accept="image/*"
-								onChange={handleImageUpload}
-								ref={imageUploader}
-							/>
-							<div
-								className="preview-img"
-								onClick={() => imageUploader.current.click()}
-							>
-								<img
-									ref={uploadedImage}
-									alt="flower"
-								/>
-							</div>
-							<p>Click to upload Image</p>
+						<div
+							className="preview-img"
+							onClick={() => imageUploader.current.click()}
+						>
+							<img ref={uploadedImage} alt="flower" />
 						</div>
 					</div>
 					<button>Submit Plant</button>
