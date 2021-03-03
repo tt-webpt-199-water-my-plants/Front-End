@@ -32,7 +32,7 @@ export default function LogInForm(props) {
 								type="text"
 								placeholder="Username"
 							/>
-							<p className='error'>{errors.username}</p>
+							<p className="error">{errors.username}</p>
 						</label>
 						<label>
 							Password
@@ -43,7 +43,7 @@ export default function LogInForm(props) {
 								type="password"
 								placeholder="Password"
 							/>
-							<p className='error'>{errors.password}</p>
+							<p className="error">{errors.password}</p>
 						</label>
 					</div>
 					<button>Log In</button>
