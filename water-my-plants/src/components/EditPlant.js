@@ -1,12 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { addNewPlant } from '../actions';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 import PlantForm from './PlantForm';
 
-const StyledAddPlant = styled.section`
+const StyledEditPlant = styled.section`
 	width:60vw;
 	max-width:550px;
 	margin:auto;
@@ -80,8 +78,8 @@ const StyledAddPlant = styled.section`
 	}
 `
 
-const AddPlant = (props) => {
-	const history = useHistory();
+const EditPlant = (props) => {
+    const history = useHistory();
 	const initialState = {
 		nickname: '',
 		h20Frequency: '',
@@ -114,7 +112,9 @@ const AddPlant = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		props.addNewPlant(state);
+
+        // NEED TO EDIT PLANT HERE
+		// props.EditPlant(state);
 
 		setState({
 			nickname: '',
@@ -128,29 +128,21 @@ const AddPlant = (props) => {
 		history.push('/plants');
 	};
 
-	return (
-		<div>
-			<StyledAddPlant>
-				<h1>Add Plant</h1>
-				<PlantForm 
+    return (
+        <div>
+            <StyledEditPlant>
+                <h1>Edit Plant</h1>
+                <PlantForm 
 					handleSubmit={handleSubmit} 
 					handleChange={handleChange} 
 					state={state} 
 					imageUploader={imageUploader} 
 					uploadedImage={uploadedImage} 
 				/>
-			</StyledAddPlant>
-			<Navigation />
-		</div>
-	);
-};
+            </StyledEditPlant>
+            <Navigation />
+        </div>
+    )
+}
 
-const mapStateToProps = (state) => {
-	return {
-		plants: state.plants,
-		isLoading: state.isLoading,
-		error: state.error,
-	};
-};
-
-export default connect(mapStateToProps, { addNewPlant })(AddPlant);
+export default EditPlant;
