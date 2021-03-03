@@ -13,6 +13,7 @@ const PlantsList = () => {
 				)}`
 			)
 			.then((response) => {
+				console.log('plants data - user =====> ', response.data);
 				setPlants(response.data);
 			});
 	};

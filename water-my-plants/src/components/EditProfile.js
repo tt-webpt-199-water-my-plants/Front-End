@@ -44,7 +44,6 @@ function EditProfile() {
 	};
 
 	const newUserData = {
-		// ...form,
 		username: form.username,
 		password: form.password,
 		phoneNumber: form.phoneNumber,

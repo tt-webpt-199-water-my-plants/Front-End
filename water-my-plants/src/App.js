@@ -11,6 +11,7 @@ function App() {
 	const clearLocalStorage = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('id');
+		localStorage.removeItem('user');
 	};
 
 	return (
@@ -25,7 +26,7 @@ function App() {
 			>
 				Log Out
 			</Link>
-			<p>Hello, {localStorage.getItem('user')}</p>
+			<p>Hello, {localStorage.getItem('user')}!</p>
 
 			<Switch>
 				<PrivateRoute
