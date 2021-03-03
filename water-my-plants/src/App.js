@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Route, Switch, Link, Redirect } from 'react-router-dom';
-
 import Signup from './components/Signup';
 import LogIn from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Plants from './components/Plants';
 import EditProfile from './components/EditProfile';
 import AddPlant from './components/AddPlant';
+import EditPlant from './components/EditPlant';
 import styled from 'styled-components';
 
 const StyledTopbar = styled.div`
@@ -66,14 +66,21 @@ function App() {
 				<PrivateRoute
 					exact
 					path="/profile"
-					component={EditProfile}
-				/>
+				>
+					<EditProfile />
+				</PrivateRoute>
 
-				<PrivateRoute path="/plants/:id/edit"></PrivateRoute>
+				<PrivateRoute path="/plants/:id/edit">
+					<EditPlant />
+				</PrivateRoute>
 
-				<PrivateRoute path="/plants/add" component={AddPlant} />
+				<PrivateRoute path="/plants/add">
+					<AddPlant />
+				</PrivateRoute>
 
-				<PrivateRoute exact path="/plants" component={Plants} />
+				<PrivateRoute exact path="/plants">
+					<Plants />
+				</PrivateRoute>
 
 				<Route path="/login">
 					<LogIn
@@ -82,7 +89,9 @@ function App() {
 					/>
 				</Route>
 
-				<Route path="/signup" component={Signup} />
+				<Route path="/signup">
+					<Signup />
+				</Route>
 
 				<Route exact path="/">
 					<Redirect to="/plants" />

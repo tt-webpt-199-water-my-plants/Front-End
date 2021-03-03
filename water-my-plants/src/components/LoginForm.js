@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as yup from 'yup';
 
 export default function LogInForm(props) {
-	const { logInData, inputChange, formSubmit } = props;
+	const { logInData, inputChange, formSubmit, errors } = props;
 
 	const onSubmit = (evt) => {
 		evt.preventDefault();
@@ -31,6 +32,7 @@ export default function LogInForm(props) {
 								type="text"
 								placeholder="Username"
 							/>
+							<p className='error'>{errors.username}</p>
 						</label>
 						<label>
 							Password
@@ -41,6 +43,7 @@ export default function LogInForm(props) {
 								type="password"
 								placeholder="Password"
 							/>
+							<p className='error'>{errors.password}</p>
 						</label>
 					</div>
 					<button>Log In</button>
