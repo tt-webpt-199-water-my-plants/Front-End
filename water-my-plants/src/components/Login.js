@@ -4,11 +4,19 @@ import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import * as yup from 'yup'
+import FormSchemaLogin from '../validation/FormSchemaLogin'
+
 
 const initialLogIn = {
 	username: '',
 	password: '',
 };
+
+const initialFormErrors = {
+	username: '',
+	password: ''
+  }
 
 const StyledLogin = styled.div`
 	width:60vw;
@@ -54,15 +62,28 @@ const StyledLogin = styled.div`
 	button:hover {
 		cursor: pointer;
 	}
+	.error {
+		position:absolute;
+		color:red;
+		font-size:.7em;
+		visibility:visible;
+		text-align:left;
+		margin:0;
+	}
 `
 
 export default function LogIn(props) {
 	const { setIsUserLoggedIn } = props;
 	const [logInData, setLogInData] = useState(initialLogIn);
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
 
 	const history = useHistory();
 
 	const inputChange = (name, value) => {
+		yup.reach(FormSchemaLogin, name)
+		  .validate(value)
+			.then(() => setFormErrors({...formErrors, [name]: ''}))
+			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
 		const userData = { ...logInData, [name]: value };
 
 		setLogInData(userData);
@@ -115,6 +136,7 @@ export default function LogIn(props) {
 				logInData={logInData}
 				inputChange={inputChange}
 				formSubmit={formSubmit}
+				errors={formErrors}
 			/>
 		</StyledLogin>
 	);

@@ -6,7 +6,12 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledEditProfile = styled.div`
+	text-align:center;
 	padding-bottom: 150px;
+
+	h1 {
+		display:none;
+	}
 `;
 
 const initialForm = {

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 import styled from 'styled-components';
+import * as yup from 'yup'
+import FormSchemaSignUp from '../validation/FormSchemaSignUp'
 
 const StyledSignup = styled.div`
 	width:60vw;
@@ -48,6 +50,14 @@ const StyledSignup = styled.div`
 	button:hover {
 		cursor: pointer;
 	}
+	.error {
+		position:absolute;
+		color:red;
+		font-size:.7em;
+		visibility:visible;
+		text-align:left;
+		margin:0;
+	}
 `
 
 const initialForm = {
@@ -56,8 +66,15 @@ const initialForm = {
 	phoneNumber: '',
 };
 
+const initialFormErrors = {
+	username: '',
+	password: '',
+	phoneNumber: ''
+  }
+
 function Signup() {
 	const [form, setForm] = useState(initialForm);
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
 
 	const history = useHistory();
 
@@ -82,7 +99,12 @@ function Signup() {
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
+		yup.reach(FormSchemaSignUp, name)
+		  .validate(value)
+			.then(() => setFormErrors({...formErrors, [name]: ''}))
+			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
 		update(name, value);
+		console.log(formErrors)
 	};
 
 	const handleSubmit = (event) => {
@@ -97,6 +119,7 @@ function Signup() {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				buttonText="Sign Up"
+				errors={formErrors}
 			/>
 		</StyledSignup>
 	);
