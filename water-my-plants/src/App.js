@@ -28,22 +28,26 @@ const StyledApp = styled.div`
 `;
 
 function App() {
-	const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem('id') ? true : false);
+	const [isUserLoggedIn, setIsUserLoggedIn] = useState(
+		localStorage.getItem('id') ? true : false
+	);
+
+	// const userName = () => {
+	// 	return localStorage.getItem('user');
+	// };
+	const [userName, setUserName] = useState([]);
 
 	const clearLocalStorage = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem('id');
-		localStorage.removeItem('user');
+		localStorage.clear();
 		setIsUserLoggedIn(false);
 	};
 
 	return (
 		<StyledApp className="App">
 			<StyledTopbar>
-				{
-					isUserLoggedIn &&
+				{isUserLoggedIn && (
 					<div>
-						<p>Hello, {localStorage.getItem('user')}! | </p>
+						<p>Hello, {userName}!</p>
 						<Link
 							to="/login"
 							onClick={() => {
@@ -53,15 +57,9 @@ function App() {
 							Log Out
 						</Link>
 					</div>
-				}
-				{
-					!isUserLoggedIn &&
-					<Link to="/login">Log In</Link>
-				}
-				{
-					!isUserLoggedIn &&
-					<Link to="/signup">Register</Link>
-				}
+				)}
+				{!isUserLoggedIn && <Link to="/login">Log In</Link>}
+				{!isUserLoggedIn && <Link to="/signup">Register</Link>}
 			</StyledTopbar>
 
 			<Switch>
@@ -85,7 +83,10 @@ function App() {
 				</PrivateRoute>
 
 				<Route path="/login">
-					<LogIn setIsUserLoggedIn={setIsUserLoggedIn} />
+					<LogIn
+						setIsUserLoggedIn={setIsUserLoggedIn}
+						setUserName={setUserName}
+					/>
 				</Route>
 
 				<Route path="/signup">

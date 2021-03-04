@@ -1,12 +1,10 @@
-// import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import * as yup from 'yup'
-import FormSchemaLogin from '../validation/FormSchemaLogin'
-
+import * as yup from 'yup';
+import FormSchemaLogin from '../validation/FormSchemaLogin';
 
 const initialLogIn = {
 	username: '',
@@ -15,65 +13,65 @@ const initialLogIn = {
 
 const initialFormErrors = {
 	username: '',
-	password: ''
-  }
+	password: '',
+};
 
 const StyledLogin = styled.div`
-	width:60vw;
-	max-width:550px;
-	margin:auto;
-	display:flex;
-	justify-content:center;
-	align-content:space-between;
-	text-align:center;
+	width: 60vw;
+	max-width: 550px;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-content: space-between;
+	text-align: center;
 
 	section {
-		color:#a1a1a1;
-		font-size:1.2em;
+		color: #a1a1a1;
+		font-size: 1.2em;
 	}
 
 	.form-group label input {
-		font-size:1.2em;
-		width:100%;
+		font-size: 1.2em;
+		width: 100%;
 		background: transparent;
 		border: none;
 		border-bottom: 2px solid #a1a1a1;
-		visibility:visible;
+		visibility: visible;
 	}
-	
+
 	form .form-group label {
-		display:block;
-		visibility:hidden;
-		margin:10% 0;
+		display: block;
+		visibility: hidden;
+		margin: 10% 0;
 	}
 	button {
-		width:100%;
+		width: 100%;
 		padding: 4%;
-		font-size:1.5em;
-		border:none;
-		background-color:#a1a1a1;
-		color:white;
+		font-size: 1.5em;
+		border: none;
+		background-color: #a1a1a1;
+		color: white;
 	}
 	a button {
-		border:2px solid #a1a1a1;
-		background-color:white;
-		color:#a1a1a1;
+		border: 2px solid #a1a1a1;
+		background-color: white;
+		color: #a1a1a1;
 	}
 	button:hover {
 		cursor: pointer;
 	}
 	.error {
-		position:absolute;
-		color:red;
-		font-size:.7em;
-		visibility:visible;
-		text-align:left;
-		margin:0;
+		position: absolute;
+		color: red;
+		font-size: 0.7em;
+		visibility: visible;
+		text-align: left;
+		margin: 0;
 	}
-`
+`;
 
 export default function LogIn(props) {
-	const { setIsUserLoggedIn } = props;
+	const { setIsUserLoggedIn, setUserName } = props;
 	const [logInData, setLogInData] = useState(initialLogIn);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
 
@@ -81,9 +79,11 @@ export default function LogIn(props) {
 
 	const inputChange = (name, value) => {
 		yup.reach(FormSchemaLogin, name)
-		  .validate(value)
-			.then(() => setFormErrors({...formErrors, [name]: ''}))
-			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+			.validate(value)
+			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
+			.catch((err) =>
+				setFormErrors({ ...formErrors, [name]: err.errors[0] })
+			);
 		const userData = { ...logInData, [name]: value };
 
 		setLogInData(userData);
@@ -125,6 +125,7 @@ export default function LogIn(props) {
 				);
 			})
 			.then(() => {
+				setUserName(localStorage.getItem('user'));
 				history.push('/plants');
 			})
 			.catch((err) => console.error('error logging in', err.message));

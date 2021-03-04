@@ -1,14 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 import PlantForm from './PlantForm';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const StyledEditPlant = styled.section`
-	width:60vw;
-	max-width:550px;
-	margin:auto;
-	text-align:center;
+	width: 60vw;
+	max-width: 550px;
+	margin: auto;
+	text-align: center;
 	padding-bottom: 150px;
 
 	h1 {
@@ -76,10 +77,12 @@ const StyledEditPlant = styled.section`
 	button:hover {
 		cursor: pointer;
 	}
-`
+`;
 
 const EditPlant = (props) => {
-    const history = useHistory();
+	const history = useHistory();
+	const { id } = useParams();
+
 	const initialState = {
 		nickname: '',
 		h20Frequency: '',
@@ -113,36 +116,51 @@ const EditPlant = (props) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-        // NEED TO EDIT PLANT HERE
-		// props.EditPlant(state);
+		// !! NEED TO EDIT PLANT HERE
+		// ?? props.EditPlant(state);
+
+		const newPlantData = {
+			...state,
+			nickname: state.nickname,
+			h20Frequency: state.h20Frequency,
+			speciesName: state.speciesName,
+			image: state.image,
+		};
+
+		axiosWithAuth()
+			.put(`/plants/edit-plants/${id}`, newPlantData)
+			.then((res) => {
+				console.log('updated plant data =====> ', res);
+				history.push('/plants');
+			})
+			.catch((err) =>
+				console.error('error changing plant data ', err.message)
+			);
 
 		setState({
 			nickname: '',
 			h20Frequency: '',
 			speciesName: '',
-
 			image: null,
 			userId: localStorage.getItem('id'),
 		});
-
-		history.push('/plants');
 	};
 
-    return (
-        <div>
-            <StyledEditPlant>
-                <h1>Edit Plant</h1>
-                <PlantForm 
-					handleSubmit={handleSubmit} 
-					handleChange={handleChange} 
-					state={state} 
-					imageUploader={imageUploader} 
-					uploadedImage={uploadedImage} 
+	return (
+		<div>
+			<StyledEditPlant>
+				<h1>Edit Plant</h1>
+				<PlantForm
+					handleSubmit={handleSubmit}
+					handleChange={handleChange}
+					state={state}
+					imageUploader={imageUploader}
+					uploadedImage={uploadedImage}
 				/>
-            </StyledEditPlant>
-            <Navigation />
-        </div>
-    )
-}
+			</StyledEditPlant>
+			<Navigation />
+		</div>
+	);
+};
 
 export default EditPlant;
