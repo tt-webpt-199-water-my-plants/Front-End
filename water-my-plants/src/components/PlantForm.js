@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PlantForm = (props) => {
-    const { handleSubmit, handleChange, state, imageUploader, uploadedImage } = props;
+    const { handleSubmit, handleChange, state } = props;
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -27,12 +27,13 @@ const PlantForm = (props) => {
                         id="speciesName"
                         placeholder="Species Name"
                     />
-                    <div
-                        className="preview-img"
-                        onClick={() => imageUploader.current.click()}
-                    >
-                        <img ref={uploadedImage} alt="flower" />
-                    </div>
+                    <input 
+                        value={state.image}
+                        onChange={handleChange}
+                        name="image"
+                        id="image"
+                        placeholder="Image URL"
+                    />
                 </div>
                 <button>Submit Plant</button>
             </form>
