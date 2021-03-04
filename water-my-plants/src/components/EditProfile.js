@@ -4,6 +4,8 @@ import Navigation from './Navigation';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import * as yup from 'yup'
+import FormSchemaEditProfile from '../validation/FormSchemaEditProfile'
 
 const StyledEditProfile = styled.div`
 	text-align: center;
@@ -11,6 +13,14 @@ const StyledEditProfile = styled.div`
 
 	h1 {
 		display: none;
+	}
+	.error {
+		position:absolute;
+		color:red;
+		font-size:.7em;
+		visibility:visible;
+		text-align:left;
+		margin:0;
 	}
 `;
 
@@ -20,9 +30,17 @@ const initialForm = {
 	phoneNumber: '',
 };
 
+
+const initialFormErrors = {
+	username: '',
+	password: '',
+	phoneNumber: ''
+  };
+
 function EditProfile() {
 	const [form, setForm] = useState(initialForm);
 	const [formTwo, setFormTwo] = useState([]);
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
 
 	const history = useHistory();
 
@@ -45,6 +63,10 @@ function EditProfile() {
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
+		yup.reach(FormSchemaEditProfile, name)
+		  .validate(value)
+			.then(() => setFormErrors({...formErrors, [name]: ''}))
+			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
 		update(name, value);
 	};
 
@@ -96,6 +118,7 @@ function EditProfile() {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				buttonText="Submit"
+				errors={formErrors}
 			/>
 			<Navigation />
 		</StyledEditProfile>
