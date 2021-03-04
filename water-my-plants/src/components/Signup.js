@@ -104,7 +104,6 @@ function Signup() {
 			.then(() => setFormErrors({...formErrors, [name]: ''}))
 			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
 		update(name, value);
-		console.log(formErrors)
 	};
 
 	const handleSubmit = (event) => {
