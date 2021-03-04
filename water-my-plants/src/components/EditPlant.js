@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigation from './Navigation';
@@ -99,27 +99,8 @@ const EditPlant = (props) => {
 		setState({ ...state, [e.target.name]: e.target.value });
 	};
 
-	const uploadedImage = useRef(null);
-	const imageUploader = useRef(null);
-
-	const handleImageUpload = (e) => {
-		const [file] = e.target.files;
-		if (file) {
-			const reader = new FileReader();
-			const { current } = uploadedImage;
-			current.file = file;
-			reader.onload = (e) => {
-				current.src = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		}
-	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		// !! NEED TO EDIT PLANT HERE
-		// ?? props.EditPlant(state);
 
 		const newPlantData = {
 			...state,
@@ -154,8 +135,6 @@ const EditPlant = (props) => {
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
 					state={state}
-					imageUploader={imageUploader}
-					uploadedImage={uploadedImage}
 				/>
 			</StyledEditPlant>
 			<Navigation />
