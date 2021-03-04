@@ -37,6 +37,8 @@ function App() {
 	// };
 	const [userName, setUserName] = useState([]);
 
+	const [plants, setPlants] = useState([]);
+
 	const clearLocalStorage = () => {
 		localStorage.clear();
 		setIsUserLoggedIn(false);
@@ -75,11 +77,11 @@ function App() {
 				</PrivateRoute>
 
 				<PrivateRoute path="/plants/add">
-					<AddPlant />
+					<AddPlant plants={plants} setPlants={setPlants} />
 				</PrivateRoute>
 
 				<PrivateRoute exact path="/plants">
-					<Plants />
+					<Plants plants={plants} setPlants={setPlants} />
 				</PrivateRoute>
 
 				<Route path="/login">

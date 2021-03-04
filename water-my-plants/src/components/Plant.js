@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const StyledPlant = styled.div`
     display: flex;
@@ -50,8 +51,23 @@ const StyledPlant = styled.div`
 `;
 
 const Plant = (props) => {
-    const { plant } = props;
+    const { plant, plants, setPlants } = props;
     const plantImage = (plant.image === 'null' || !plant.image) ? '/plant-thumbnail.png' : plant.image;
+
+    const deletePlant = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        axiosWithAuth().delete(`https://water-my-plants-api-t199.herokuapp.com/api/plants/delete-plant/${plant.id}`)
+        .then((response) => {
+            setPlants(plants.reduce((allPlants, currentPlant) => {
+                if (currentPlant.id != plant.id) {
+                    allPlants.push(currentPlant);
+                }
+                return allPlants;
+            }, []));
+        });
+    }
+
     return ( 
         <Link to={`/plants/${plant.id}/edit`}>
             <StyledPlant>
@@ -60,7 +76,7 @@ const Plant = (props) => {
                     <p className="nickname">{plant.nickname} <span className="species">({plant.speciesName})</span></p>
                     <p className="watering-frequency">Watering Frequency: {plant.h20Frequency} days</p>
                 </div>
-                <button>x</button>
+                <button onClick={deletePlant}>x</button>
             </StyledPlant>
         </Link>
      );

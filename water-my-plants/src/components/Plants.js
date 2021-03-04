@@ -15,12 +15,13 @@ const StyledPlants = styled.div`
 `;
 
 
-function Plants() {
+function Plants(props) {
+    const { plants, setPlants } = props;
     return (
         <StyledPlants>
             <Notifications />
             <h2>My Plants</h2>
-            <PlantsList />
+            <PlantsList plants={plants} setPlants={setPlants} />
             <Navigation />
         </StyledPlants>
     )

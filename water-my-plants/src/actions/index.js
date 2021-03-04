@@ -43,6 +43,7 @@ export const addNewPlant = (plant) => {
 			.then((res) => {
 				console.log('Plant data added to API =====> ', plant);
 				dispatch({ type: ADD_SUCCESS, payload: res.data });
+				return res.data;
 			})
 			.catch((err) => {
 				console.error('unable to add plant data', err.message);
