@@ -80,15 +80,17 @@ const StyledEditPlant = styled.section`
 `;
 
 const EditPlant = (props) => {
+	const { plants, setPlants} = props;
 	const history = useHistory();
 	const { id } = useParams();
+	const plantToEdit = plants.find((plant) => plant.id == id);
 
 	const initialState = {
-		nickname: '',
-		h20Frequency: '',
-		speciesName: '',
+		nickname: plantToEdit.nickname,
+		h20Frequency: plantToEdit.h20Frequency,
+		speciesName: plantToEdit.speciesName,
 		userId: localStorage.getItem('id'),
-		image: null,
+		image: plantToEdit.image,
 	};
 
 	const [state, setState] = useState(initialState);
@@ -130,20 +132,18 @@ const EditPlant = (props) => {
 		axiosWithAuth()
 			.put(`/plants/edit-plants/${id}`, newPlantData)
 			.then((res) => {
-				console.log('updated plant data =====> ', res);
+				setState({
+					nickname: '',
+					h20Frequency: '',
+					speciesName: '',
+					image: null,
+					userId: localStorage.getItem('id'),
+				});
 				history.push('/plants');
 			})
 			.catch((err) =>
 				console.error('error changing plant data ', err.message)
 			);
-
-		setState({
-			nickname: '',
-			h20Frequency: '',
-			speciesName: '',
-			image: null,
-			userId: localStorage.getItem('id'),
-		});
 	};
 
 	return (

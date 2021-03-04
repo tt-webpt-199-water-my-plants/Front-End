@@ -73,7 +73,7 @@ function App() {
 				</PrivateRoute>
 
 				<PrivateRoute path="/plants/:id/edit">
-					<EditPlant />
+					<EditPlant plants={plants} setPlants={setPlants} />
 				</PrivateRoute>
 
 				<PrivateRoute path="/plants/add">
