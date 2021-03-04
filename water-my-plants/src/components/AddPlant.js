@@ -81,6 +81,7 @@ const StyledAddPlant = styled.section`
 `
 
 const AddPlant = (props) => {
+	const { plants, setPlants } = props;
 	const history = useHistory();
 	const initialState = {
 		nickname: '',
@@ -114,7 +115,9 @@ const AddPlant = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		props.addNewPlant(state);
+		props.addNewPlant(state, (response) => {
+			setPlants([...plants, response])
+		});
 
 		setState({
 			nickname: '',

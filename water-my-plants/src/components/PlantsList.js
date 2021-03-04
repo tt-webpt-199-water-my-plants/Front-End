@@ -11,8 +11,8 @@ const StyledPlantsList = styled.div`
 	}
 `;
 
-const PlantsList = () => {
-	const [plants, setPlants] = useState([]);
+const PlantsList = (props) => {
+	const { plants, setPlants } = props;
 
 	const getPlants = () => {
 		axiosWithAuth()
@@ -30,7 +30,7 @@ const PlantsList = () => {
 	return (
 		<StyledPlantsList>
 			{plants.map((plant) => {
-				return <Plant plant={plant} key={plant.id} />;
+				return <Plant plant={plant} plants={plants} setPlants={setPlants} key={plant.id} />;
 			})}
 		</StyledPlantsList>
 	);
