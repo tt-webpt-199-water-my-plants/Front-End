@@ -19,7 +19,8 @@ const StyledTopbar = styled.div`
 	a {
 		text-decoration: none;
 		padding: 5px 10px;
-		color: #777;
+		color: #99c4d1;
+		font-weight: 600;
 	}
 
 	>div {

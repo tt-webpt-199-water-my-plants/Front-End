@@ -4,12 +4,12 @@ import styled from 'styled-components';
 const StyledNotifications = styled.div`
     display: flex;
     align-items: center;
-    background: #efefef;
-    margin: 0 20px;
+    background: #f0e2e2;
+    margin: 0 20px 30px;
     border-radius: 10px;
     padding: 10px;
     font-weight: bold;
-    color: #777;
+    color: #d39797;
 
     img {
         width: 30px;

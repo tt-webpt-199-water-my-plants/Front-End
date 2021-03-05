@@ -15,12 +15,13 @@ const StyledEditProfile = styled.div`
 		display: none;
 	}
 	.error {
-		position:absolute;
-		color:red;
-		font-size:.7em;
-		visibility:visible;
-		text-align:left;
-		margin:0;
+		position: absolute;
+		color: #e08c8c;
+		font-weight: bold;
+		font-size: .7em;
+		visibility: visible;
+		text-align: left;
+		margin: 5px 0 0;
 	}
 `;
 

@@ -16,6 +16,20 @@ const initialFormErrors = {
 	password: '',
 };
 
+const StyledLoginWrapper = styled.div`
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	padding-bottom: 50px;
+
+	img {
+		flex 0 0 auto;
+		width: 170px;
+		border-radius: 100px;
+		margin-bottom: 20px;
+	}
+`;
+
 const StyledLogin = styled.div`
 	width: 60vw;
 	max-width: 550px;
@@ -26,7 +40,7 @@ const StyledLogin = styled.div`
 	text-align: center;
 
 	section {
-		color: #a1a1a1;
+		color: #b3b5ba;
 		font-size: 1.2em;
 	}
 
@@ -35,8 +49,12 @@ const StyledLogin = styled.div`
 		width: 100%;
 		background: transparent;
 		border: none;
-		border-bottom: 2px solid #a1a1a1;
+		border-bottom: 2px solid #99c4d1;
 		visibility: visible;
+
+		&::placeholder {
+			color: #b3b5ba;
+		}
 	}
 
 	form .form-group label {
@@ -47,30 +65,42 @@ const StyledLogin = styled.div`
 	button {
 		width: 100%;
 		padding: 4%;
-		font-size: 1.5em;
+		font-size: 1.3em;
 		border: none;
-		background-color: #a1a1a1;
+		background-color: #99c4d1;
 		color: white;
+		font-weight: 600;
+		transition: all .2s linear;
 	}
 	a button {
-		border: 2px solid #a1a1a1;
+		border: 2px solid #99c4d1;
 		background-color: white;
-		color: #a1a1a1;
+		color: #99c4d1;
+
+		&:hover {
+			background-color: #99c4d1;
+			color: #fff;
+		}
 	}
 	button:hover {
 		cursor: pointer;
-
-		&:disabled {
-			cursor: initial;
-		}
+		background-color: rgba(153, 196, 209, .8);
+	}
+	button:disabled {
+		cursor: initial;
+		background-color: #99c4d1;
 	}
 	.error {
 		position: absolute;
-		color: red;
+		color: #e08c8c;
+		font-weight: bold;
 		font-size: 0.7em;
 		visibility: visible;
 		text-align: left;
-		margin: 0;
+		margin: 5px 0 0;
+	}
+	h1 {
+		color: #282e32;
 	}
 `;
 
@@ -142,14 +172,17 @@ export default function LogIn(props) {
 	};
 
 	return (
-		<StyledLogin>
-			<LoginForm
-				logInData={logInData}
-				inputChange={inputChange}
-				formSubmit={formSubmit}
-				errors={formErrors}
-				disabled={disabled}
-			/>
-		</StyledLogin>
+		<StyledLoginWrapper>
+			<img src="plant-thumbnail.png" />
+			<StyledLogin>
+				<LoginForm
+					logInData={logInData}
+					inputChange={inputChange}
+					formSubmit={formSubmit}
+					errors={formErrors}
+					disabled={disabled}
+				/>
+			</StyledLogin>
+		</StyledLoginWrapper>
 	);
 }

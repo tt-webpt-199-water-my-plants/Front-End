@@ -8,7 +8,7 @@ const StyledLoginSection = styled.div`
 	a {
 		text-decoration: none;
 		font-weight: bold;
-		color: #777;
+		color: #99c4d1;
 	}
 `;
 
@@ -23,7 +23,7 @@ const StyledUserForm = styled.div`
 	text-align:center;
 
 	section {
-		color:#a1a1a1;
+		color:#b3b5ba;
 		font-size:1.2em;
 	}
 
@@ -32,8 +32,12 @@ const StyledUserForm = styled.div`
 		width:100%;
 		background: transparent;
 		border: none;
-		border-bottom: 2px solid #a1a1a1;
+		border-bottom: 2px solid #99c4d1;
 		visibility:visible;
+
+		&::placeholder {
+			color: #b3b5ba;
+		}
 	}
 	
 	form .form-group label {
@@ -44,21 +48,25 @@ const StyledUserForm = styled.div`
 	button {
 		width:100%;
 		padding: 4%;
-		font-size:1.5em;
-		border:none;
-		background-color:#a1a1a1;
-		color:white;
+		font-size: 1.5em;
+		border: none;
+		background-color: #99c4d1;
+		color: white;
+		transition: all .2s linear;
 	}
 	a button {
-		border:2px solid #a1a1a1;
+		border:2px solid #99c4d1;
 		background-color:white;
-		color:#a1a1a1;
+		color:#99c4d1;
 	}
 	button:hover {
 		cursor: pointer;
+		background-color: rgba(153, 196, 209, .8);
+		color: #fff;
 
 		&:disabled {
 			cursor: initial;
+			background-color: #99c4d1;
 		}
 	}
 `;

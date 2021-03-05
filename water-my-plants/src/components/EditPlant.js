@@ -21,7 +21,7 @@ const StyledEditPlant = styled.section`
 	form {
 		width: 100%;
 		margin: auto;
-		color: #a1a1a1;
+		color: #b3b5ba;
 		font-size: 1.2em;
 	}
 
@@ -30,10 +30,14 @@ const StyledEditPlant = styled.section`
 		width: 100%;
 		background: transparent;
 		border: none;
-		border-bottom: 2px solid #a1a1a1;
+		border-bottom: 2px solid #99c4d1;
 		padding: 12px 0;
 		visibility: visible;
 		margin: 6% 0;
+
+		&::placeholder {
+			color: #b3b5ba;
+		}
 	}
 
 	form .form-group label {
@@ -46,13 +50,14 @@ const StyledEditPlant = styled.section`
 		padding: 4%;
 		font-size: 1.5em;
 		border: none;
-		background-color: #a1a1a1;
+		background-color: #99c4d1;
 		color: white;
+		transition: all .2s linear;
 	}
 	a button {
-		border: 2px solid #a1a1a1;
+		border: 2px solid #99c4d1;
 		background-color: white;
-		color: #a1a1a1;
+		color: #99c4d1;
 	}
 	.img-button {
 		display: flex;
@@ -78,9 +83,12 @@ const StyledEditPlant = styled.section`
 	}
 	button:hover {
 		cursor: pointer;
+		background-color: rgba(153, 196, 209, .8);
+		color: #fff;
 
 		&:disabled {
 			cursor: initial;
+			background-color: #99c4d1;
 		}
 	}
 `;

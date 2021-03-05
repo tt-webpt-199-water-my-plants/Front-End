@@ -14,49 +14,21 @@ const StyledSignup = styled.div`
 	justify-content:center;
 	align-content:space-between;
 	text-align:center;
+	padding-bottom: 50px;
 
 	section {
 		color:#a1a1a1;
 		font-size:1.2em;
 	}
 
-	.form-group label input {
-		font-size:1.2em;
-		width:100%;
-		background: transparent;
-		border: none;
-		border-bottom: 2px solid #a1a1a1;
-		visibility:visible;
-	}
-	
-	form .form-group label {
-		display:block;
-		visibility:hidden;
-		margin:10% 0;
-	}
-	button {
-		width:100%;
-		padding: 4%;
-		font-size:1.5em;
-		border:none;
-		background-color:#a1a1a1;
-		color:white;
-	}
-	a button {
-		border:2px solid #a1a1a1;
-		background-color:white;
-		color:#a1a1a1;
-	}
-	button:hover {
-		cursor: pointer;
-	}
 	.error {
 		position:absolute;
-		color:red;
+		color:#e08c8c;
+		font-weight: bold;
 		font-size:.7em;
 		visibility:visible;
 		text-align:left;
-		margin:0;
+		margin:5px 0 0;
 	}
 `
 

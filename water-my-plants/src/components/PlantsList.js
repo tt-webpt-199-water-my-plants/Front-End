@@ -8,6 +8,30 @@ const StyledPlantsList = styled.div`
 
 	a {
 		text-decoration: none;
+
+		&:nth-child(3n + 1) .plant {
+			background: #c2d6bd;
+			
+			.species, .watering-frequency, button {
+				color: #709468;
+			}
+		}
+
+		&:nth-child(3n + 2) .plant {
+			background: #c9e3e3;
+			
+			.species, .watering-frequency, button {
+				color: #6c9e9e;
+			}
+		}
+
+		&:nth-child(3n + 3) .plant {
+			background: #f2dac6;
+			
+			.species, .watering-frequency, button {
+				color: #ce8e59;
+			}
+		}
 	}
 `;
 
