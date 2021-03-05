@@ -7,13 +7,18 @@ const StyledNavigation = styled.div`
 	bottom: 0;
 	left: 0;
 	width: 100%;
+	box-shadow: 0 -10px 10px rgba(0,0,0,.1);
+	display: flex;
+	justify-content: center;
 
 	nav {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-end;
 		background: #fff;
-		box-shadow: 0 -10px 10px rgba(0,0,0,.1);
+		
+		width: 100%;
+		max-width: 1000px;
 	}
 
 	.add-button {
