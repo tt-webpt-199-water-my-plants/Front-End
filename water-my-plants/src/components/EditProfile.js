@@ -67,15 +67,16 @@ function EditProfile(props) {
 					(user) => user.id === Number(userId)
 				);
 				setForm({
-					...form,
+					// ...form,
 					username: currentUser.username,
+					password: currentUser.password,
 					phoneNumber: currentUser.phoneNumber,
 				});
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
 			);
-	}, [userId, form]);
+	}, [userId]);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
