@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as yup from 'yup';
 
 export default function LogInForm(props) {
-	const { logInData, inputChange, formSubmit, errors } = props;
+	const { logInData, inputChange, formSubmit, errors, disabled } = props;
 
 	const onSubmit = (evt) => {
 		evt.preventDefault();
@@ -46,7 +45,7 @@ export default function LogInForm(props) {
 							<p className="error">{errors.password}</p>
 						</label>
 					</div>
-					<button>Log In</button>
+					<button disabled={disabled}>Log In</button>
 				</form>
 				<h3>or</h3>
 				<Link to="/signup">

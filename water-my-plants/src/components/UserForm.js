@@ -56,11 +56,15 @@ const StyledUserForm = styled.div`
 	}
 	button:hover {
 		cursor: pointer;
+
+		&:disabled {
+			cursor: initial;
+		}
 	}
 `;
 
 function UserForm(props) {
-	const { form, handleChange, handleSubmit, buttonText, errors, isUserLoggedIn } = props;
+	const { form, handleChange, handleSubmit, buttonText, errors, isUserLoggedIn, disabled } = props;
 	return (
 		<StyledUserForm>
 			<div>
@@ -108,7 +112,7 @@ function UserForm(props) {
 								<p className='error'>{errors.phoneNumber}</p>
 							</label>
 						</div>
-						<button>{buttonText}</button>
+						<button disabled={disabled}>{buttonText}</button>
 					</form>
 				</section>
 			</div>

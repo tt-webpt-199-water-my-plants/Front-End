@@ -1,5 +1,5 @@
 import axiosWithAuth from '../utils/axiosWithAuth';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from './LoginForm';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -59,6 +59,10 @@ const StyledLogin = styled.div`
 	}
 	button:hover {
 		cursor: pointer;
+
+		&:disabled {
+			cursor: initial;
+		}
 	}
 	.error {
 		position: absolute;
@@ -72,10 +76,16 @@ const StyledLogin = styled.div`
 
 export default function LogIn(props) {
 	const { setIsUserLoggedIn, setUserName } = props;
+	const initialDisabled = true;
 	const [logInData, setLogInData] = useState(initialLogIn);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
-
+	const [disabled, setDisabled] = useState(initialDisabled);
 	const history = useHistory();
+
+	useEffect(() => {
+		FormSchemaLogin.isValid(logInData)
+		.then(isValid => setDisabled(!isValid))
+	}, [logInData])
 
 	const inputChange = (name, value) => {
 		yup.reach(FormSchemaLogin, name)
@@ -138,6 +148,7 @@ export default function LogIn(props) {
 				inputChange={inputChange}
 				formSubmit={formSubmit}
 				errors={formErrors}
+				disabled={disabled}
 			/>
 		</StyledLogin>
 	);

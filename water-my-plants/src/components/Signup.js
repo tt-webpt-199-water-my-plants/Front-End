@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 import styled from 'styled-components';
@@ -74,8 +74,15 @@ const initialFormErrors = {
 
 function Signup(props) {
 	const { isUserLoggedIn } = props;
+	const initialDisabled = true;
 	const [form, setForm] = useState(initialForm);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
+	const [disabled, setDisabled] = useState(initialDisabled);
+
+	useEffect(() => {
+		FormSchemaSignUp.isValid(form)
+		.then(isValid => setDisabled(!isValid))
+	}, [form])
 
 	const history = useHistory();
 
@@ -121,6 +128,7 @@ function Signup(props) {
 				buttonText="Sign Up"
 				errors={formErrors}
 				isUserLoggedIn={isUserLoggedIn}
+				disabled={disabled}
 			/>
 		</StyledSignup>
 	);
