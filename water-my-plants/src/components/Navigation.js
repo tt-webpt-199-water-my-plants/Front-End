@@ -7,7 +7,7 @@ const StyledNavigation = styled.div`
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	box-shadow: 0 -10px 10px rgba(0,0,0,.1);
+	box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
 	display: flex;
 	justify-content: center;
 
@@ -16,7 +16,7 @@ const StyledNavigation = styled.div`
 		justify-content: space-between;
 		align-items: flex-end;
 		background: #fff;
-		
+
 		width: 100%;
 		max-width: 1000px;
 	}
@@ -26,13 +26,14 @@ const StyledNavigation = styled.div`
 		left: 50%;
 		transform: translateX(-50%);
 		padding: 20px 30px;
-		
+
 		img {
 			width: 80px;
 		}
 	}
 
-	.home-icon, .profile-icon {
+	.home-icon,
+	.profile-icon {
 		display: flex;
 		flex-flow: column nowrap;
 		align-items: center;
@@ -52,14 +53,14 @@ const Navigation = () => {
 		<StyledNavigation>
 			<nav>
 				<Link to="/plants" className="home-icon">
-					<img src="/home-icon.png" />
+					<img src="/home-icon.png" alt="home" />
 					<span>Home</span>
 				</Link>
 				<Link to="/plants/add" className="add-button">
-					<img src="/add-button.png" />
+					<img src="/add-button.png" alt="add-plant" />
 				</Link>
 				<Link to="/profile" className="profile-icon">
-					<img src="/profile-icon.png" />
+					<img src="/profile-icon.png" alt="profile" />
 					<span>Profile</span>
 				</Link>
 			</nav>

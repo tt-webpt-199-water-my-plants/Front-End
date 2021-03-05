@@ -52,7 +52,7 @@ const StyledEditPlant = styled.section`
 		border: none;
 		background-color: #99c4d1;
 		color: white;
-		transition: all .2s linear;
+		transition: all 0.2s linear;
 	}
 	a button {
 		border: 2px solid #99c4d1;
@@ -83,7 +83,7 @@ const StyledEditPlant = styled.section`
 	}
 	button:hover {
 		cursor: pointer;
-		background-color: rgba(153, 196, 209, .8);
+		background-color: rgba(153, 196, 209, 0.8);
 		color: #fff;
 
 		&:disabled {
@@ -94,10 +94,10 @@ const StyledEditPlant = styled.section`
 `;
 
 const EditPlant = (props) => {
-	const { plants, setPlants} = props;
+	const { plants } = props;
 	const history = useHistory();
 	const { id } = useParams();
-	const plantToEdit = plants.find((plant) => plant.id == id);
+	const plantToEdit = plants.find((plant) => plant.id === id);
 	const initialDisabled = true;
 
 	const initialState = {
@@ -113,24 +113,27 @@ const EditPlant = (props) => {
 		h20Frequency: '',
 		speciesName: '',
 		image: '',
-	}
+	};
 
 	const [state, setState] = useState(initialState);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
 	const [disabled, setDisabled] = useState(initialDisabled);
 
 	useEffect(() => {
-		FormSchemaEditPlant.isValid(state)
-		.then(isValid => setDisabled(!isValid))
-	}, [state])
+		FormSchemaEditPlant.isValid(state).then((isValid) =>
+			setDisabled(!isValid)
+		);
+	}, [state]);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		yup.reach(FormSchemaEditPlant, name)
-		  .validate(value)
-			.then(() => setFormErrors({...formErrors, [name]: ''}))
-			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
-		setState({ ...state, [name]: value })
+			.validate(value)
+			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
+			.catch((err) =>
+				setFormErrors({ ...formErrors, [name]: err.errors[0] })
+			);
+		setState({ ...state, [name]: value });
 	};
 
 	const handleSubmit = (e) => {

@@ -4,8 +4,8 @@ import Navigation from './Navigation';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import * as yup from 'yup'
-import FormSchemaEditProfile from '../validation/FormSchemaEditProfile'
+import * as yup from 'yup';
+import FormSchemaEditProfile from '../validation/FormSchemaEditProfile';
 
 const StyledEditProfile = styled.div`
 	text-align: center;
@@ -18,7 +18,7 @@ const StyledEditProfile = styled.div`
 		position: absolute;
 		color: #e08c8c;
 		font-weight: bold;
-		font-size: .7em;
+		font-size: 0.7em;
 		visibility: visible;
 		text-align: left;
 		margin: 5px 0 0;
@@ -31,12 +31,11 @@ const initialForm = {
 	phoneNumber: '',
 };
 
-
 const initialFormErrors = {
 	username: '',
 	password: '',
-	phoneNumber: ''
-  };
+	phoneNumber: '',
+};
 
 function EditProfile(props) {
 	const { isUserLoggedIn } = props;
@@ -46,9 +45,10 @@ function EditProfile(props) {
 	const [disabled, setDisabled] = useState(initialDisabled);
 
 	useEffect(() => {
-		FormSchemaEditProfile.isValid(form)
-		.then(isValid => setDisabled(!isValid))
-	}, [form])
+		FormSchemaEditProfile.isValid(form).then((isValid) =>
+			setDisabled(!isValid)
+		);
+	}, [form]);
 
 	const history = useHistory();
 
@@ -56,25 +56,35 @@ function EditProfile(props) {
 		setForm({ ...form, [name]: value });
 	};
 
+	const userId = localStorage.getItem('id');
+
 	useEffect(() => {
 		// ?? get user data and update form state with user's username, password, and phone number
 		axiosWithAuth()
 			.get(`/auth`)
 			.then((res) => {
-				const currentUser = res.data.filter((user) => user.id == localStorage.getItem('id'))[0];
-				setForm({...form, ['username']: currentUser.username, ['phoneNumber']: currentUser.phoneNumber});
+				const currentUser = res.data.filter(
+					(user) => user.id === Number(userId)
+				);
+				setForm({
+					...form,
+					['username']: currentUser.username,
+					['phoneNumber']: currentUser.phoneNumber,
+				});
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
 			);
-	}, []);
+	}, [userId, form]);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		yup.reach(FormSchemaEditProfile, name)
-		  .validate(value)
-			.then(() => setFormErrors({...formErrors, [name]: ''}))
-			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+			.validate(value)
+			.then(() => setFormErrors({ ...formErrors, [name]: '' }))
+			.catch((err) =>
+				setFormErrors({ ...formErrors, [name]: err.errors[0] })
+			);
 		update(name, value);
 	};
 
