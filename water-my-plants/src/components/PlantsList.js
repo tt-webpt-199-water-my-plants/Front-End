@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import Plant from './Plant';
 import styled from 'styled-components';
@@ -57,7 +57,9 @@ const PlantsList = (props) => {
 			});
 	};
 
-	getPlants();
+	useEffect(() => {
+		getPlants();
+	}, []);
 
 	return (
 		<StyledPlantsList>
