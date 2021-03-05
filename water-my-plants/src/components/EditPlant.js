@@ -97,7 +97,7 @@ const EditPlant = (props) => {
 	const { plants } = props;
 	const history = useHistory();
 	const { id } = useParams();
-	const plantToEdit = plants.find((plant) => plant.id === id);
+	const plantToEdit = plants.find((plant) => plant.id === Number(id));
 	const initialDisabled = true;
 
 	const initialState = {

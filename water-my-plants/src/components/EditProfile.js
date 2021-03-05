@@ -68,8 +68,8 @@ function EditProfile(props) {
 				);
 				setForm({
 					...form,
-					['username']: currentUser.username,
-					['phoneNumber']: currentUser.phoneNumber,
+					username: currentUser.username,
+					phoneNumber: currentUser.phoneNumber,
 				});
 			})
 			.catch((err) =>
