@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const StyledPlantForm = styled.div`
     .error {
-        color: red;
+        color: #e08c8c;
+        font-weight: bold;
         font-size: .7em;
         visibility: visible;
         text-align: left;

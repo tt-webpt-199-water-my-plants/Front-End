@@ -15,12 +15,13 @@ const StyledEditProfile = styled.div`
 		display: none;
 	}
 	.error {
-		position:absolute;
-		color:red;
-		font-size:.7em;
-		visibility:visible;
-		text-align:left;
-		margin:0;
+		position: absolute;
+		color: #e08c8c;
+		font-weight: bold;
+		font-size: .7em;
+		visibility: visible;
+		text-align: left;
+		margin: 5px 0 0;
 	}
 `;
 
@@ -39,9 +40,15 @@ const initialFormErrors = {
 
 function EditProfile(props) {
 	const { isUserLoggedIn } = props;
+	const initialDisabled = true;
 	const [form, setForm] = useState(initialForm);
-	const [formTwo, setFormTwo] = useState([]);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
+	const [disabled, setDisabled] = useState(initialDisabled);
+
+	useEffect(() => {
+		FormSchemaEditProfile.isValid(form)
+		.then(isValid => setDisabled(!isValid))
+	}, [form])
 
 	const history = useHistory();
 
@@ -56,7 +63,6 @@ function EditProfile(props) {
 			.then((res) => {
 				const currentUser = res.data.filter((user) => user.id == localStorage.getItem('id'))[0];
 				setForm({...form, ['username']: currentUser.username, ['phoneNumber']: currentUser.phoneNumber});
-				setFormTwo(currentUser);
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
@@ -84,10 +90,6 @@ function EditProfile(props) {
 		id: localStorage.getItem('id'),
 	};
 
-	console.log('newUserData =====> ', newUserData);
-	console.log('form =====> ', form);
-	console.log('formTwo =====> ', formTwo);
-
 	const submit = () => {
 		// ?? use axios to post put/update data for the current user
 		axiosWithAuth()
@@ -113,6 +115,7 @@ function EditProfile(props) {
 				buttonText="Submit"
 				errors={formErrors}
 				isUserLoggedIn={isUserLoggedIn}
+				disabled={disabled}
 			/>
 			<Navigation />
 		</StyledEditProfile>

@@ -7,8 +7,9 @@ const StyledPlant = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
-    border-bottom: 2px solid #efefef;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 20px;
 
     img {
         width: 100px;
@@ -21,17 +22,19 @@ const StyledPlant = styled.div`
     }
 
     button {
-        background: none;
-        border: 2px solid #ccc;
-        color: #ccc;
+        background: #fff;
+        border: none;
         font-weight: bold;
-        font-size: 1.05rem;
+        font-size: 1.1rem;
         border-radius: 50px;
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
+        transition: all .15s linear;
 
         &:hover {
             cursor: pointer;
+            color: #d39797!important;
+            box-shadow: 0 5px 5px rgba(0,0,0,.1);
         }
     }
 
@@ -41,12 +44,33 @@ const StyledPlant = styled.div`
         font-weight: 500;
     }
 
-    .species {
-        color: #999;
-    }
+    @media screen and (max-width: 767px) {
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+        position: relative;
 
-    .watering-frequency {
-        color: #999;
+        img {
+            margin: 0;
+            border: 3px solid #fff;
+            border-radius: 10px;
+        }
+
+        .nickname {
+            margin-bottom: 0;
+        }
+
+        .watering-frequency {
+            margin: 10px 0 10px;
+        }
+
+        button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     }
 `;
 
@@ -70,7 +94,7 @@ const Plant = (props) => {
 
     return ( 
         <Link to={`/plants/${plant.id}/edit`}>
-            <StyledPlant>
+            <StyledPlant className="plant">
                 <img src={plantImage} />
                 <div className="plant-content">
                     <p className="nickname">{plant.nickname} <span className="species">({plant.speciesName})</span></p>

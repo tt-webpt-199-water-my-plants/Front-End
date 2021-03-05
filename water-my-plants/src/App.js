@@ -12,19 +12,30 @@ import styled from 'styled-components';
 const StyledTopbar = styled.div`
 	display: flex;
 	width: 100%;
-	justify-content: flex-end;
+	justify-content: center;
 	padding: 10px;
 	box-sizing: border-box;
+
+	.container {
+		width: 100%;
+		max-width: 1000px;
+		padding: 0 10px;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		>div {
+			display: flex;
+			align-items: center;
+		}
+	}
 
 	a {
 		text-decoration: none;
 		padding: 5px 10px;
-		color: #777;
-	}
-
-	>div {
-		display: flex;
-		align-items: center;
+		color: #99c4d1;
+		font-weight: 600;
 	}
 
 	.divider {
@@ -60,23 +71,25 @@ function App() {
 	return (
 		<StyledApp className="App">
 			<StyledTopbar>
-				{isUserLoggedIn && (
-					<div>
-						<p>Hello, {userName}!</p>
-						<span className="divider"> 👋 </span>
-						<Link
-							to="/login"
-							onClick={() => {
-								clearLocalStorage();
-								setPlants([]);
-							}}
-						>
-							Log Out
-						</Link>
-					</div>
-				)}
-				{!isUserLoggedIn && <Link to="/login">Log In</Link>}
-				{!isUserLoggedIn && <Link to="/signup">Sign Up</Link>}
+				<div className="container">
+					{isUserLoggedIn && (
+						<div>
+							<p>Hello, {userName}!</p>
+							<span className="divider"> 👋 </span>
+							<Link
+								to="/login"
+								onClick={() => {
+									clearLocalStorage();
+									setPlants([]);
+								}}
+							>
+								Log Out
+							</Link>
+						</div>
+					)}
+					{!isUserLoggedIn && <Link to="/login">Log In</Link>}
+					{!isUserLoggedIn && <Link to="/signup">Sign Up</Link>}
+				</div>
 			</StyledTopbar>
 
 			<Switch>
