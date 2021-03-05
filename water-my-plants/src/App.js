@@ -25,7 +25,7 @@ const StyledTopbar = styled.div`
 		align-items: center;
 		justify-content: flex-end;
 
-		>div {
+		> div {
 			display: flex;
 			align-items: center;
 		}
@@ -93,13 +93,8 @@ function App() {
 			</StyledTopbar>
 
 			<Switch>
-				<PrivateRoute
-					exact
-					path="/profile"
-				>
-					<EditProfile 
-						isUserLoggedIn={isUserLoggedIn}
-					/>
+				<PrivateRoute exact path="/profile">
+					<EditProfile isUserLoggedIn={isUserLoggedIn} />
 				</PrivateRoute>
 
 				<PrivateRoute path="/plants/:id/edit">
@@ -122,13 +117,11 @@ function App() {
 				</Route>
 
 				<Route path="/signup">
-					<Signup 
-						isUserLoggedIn={isUserLoggedIn}
-					/>
+					<Signup isUserLoggedIn={isUserLoggedIn} />
 				</Route>
 
 				<Route exact path="/">
-					<Redirect to="/plants" />
+					<Redirect to="/login" />
 				</Route>
 			</Switch>
 		</StyledApp>
