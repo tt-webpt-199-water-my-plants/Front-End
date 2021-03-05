@@ -70,7 +70,7 @@ const StyledLogin = styled.div`
 		background-color: #99c4d1;
 		color: white;
 		font-weight: 600;
-		transition: all .2s linear;
+		transition: all 0.2s linear;
 	}
 	a button {
 		border: 2px solid #99c4d1;
@@ -84,7 +84,7 @@ const StyledLogin = styled.div`
 	}
 	button:hover {
 		cursor: pointer;
-		background-color: rgba(153, 196, 209, .8);
+		background-color: rgba(153, 196, 209, 0.8);
 	}
 	button:disabled {
 		cursor: initial;
@@ -113,9 +113,10 @@ export default function LogIn(props) {
 	const history = useHistory();
 
 	useEffect(() => {
-		FormSchemaLogin.isValid(logInData)
-		.then(isValid => setDisabled(!isValid))
-	}, [logInData])
+		FormSchemaLogin.isValid(logInData).then((isValid) =>
+			setDisabled(!isValid)
+		);
+	}, [logInData]);
 
 	const inputChange = (name, value) => {
 		yup.reach(FormSchemaLogin, name)
@@ -173,7 +174,7 @@ export default function LogIn(props) {
 
 	return (
 		<StyledLoginWrapper>
-			<img src="plant-thumbnail.png" />
+			<img src="plant-thumbnail.png" alt="plant" />
 			<StyledLogin>
 				<LoginForm
 					logInData={logInData}
