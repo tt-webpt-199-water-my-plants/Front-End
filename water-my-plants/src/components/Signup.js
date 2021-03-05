@@ -70,9 +70,10 @@ const initialFormErrors = {
 	username: '',
 	password: '',
 	phoneNumber: ''
-  }
+}
 
-function Signup() {
+function Signup(props) {
+	const { isUserLoggedIn } = props;
 	const [form, setForm] = useState(initialForm);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
 
@@ -119,6 +120,7 @@ function Signup() {
 				handleSubmit={handleSubmit}
 				buttonText="Sign Up"
 				errors={formErrors}
+				isUserLoggedIn={isUserLoggedIn}
 			/>
 		</StyledSignup>
 	);

@@ -11,12 +11,25 @@ import styled from 'styled-components';
 
 const StyledTopbar = styled.div`
 	display: flex;
+	width: 100%;
+	justify-content: flex-end;
 	padding: 10px;
+	box-sizing: border-box;
 
 	a {
 		text-decoration: none;
 		padding: 5px 10px;
 		color: #777;
+	}
+
+	>div {
+		display: flex;
+		align-items: center;
+	}
+
+	.divider {
+		margin-left: 10px;
+		font-size: 1.1rem;
 	}
 `;
 
@@ -50,10 +63,12 @@ function App() {
 				{isUserLoggedIn && (
 					<div>
 						<p>Hello, {userName}!</p>
+						<span className="divider"> 👋 </span>
 						<Link
 							to="/login"
 							onClick={() => {
 								clearLocalStorage();
+								setPlants([]);
 							}}
 						>
 							Log Out
@@ -61,7 +76,7 @@ function App() {
 					</div>
 				)}
 				{!isUserLoggedIn && <Link to="/login">Log In</Link>}
-				{!isUserLoggedIn && <Link to="/signup">Register</Link>}
+				{!isUserLoggedIn && <Link to="/signup">Sign Up</Link>}
 			</StyledTopbar>
 
 			<Switch>
@@ -69,7 +84,9 @@ function App() {
 					exact
 					path="/profile"
 				>
-					<EditProfile />
+					<EditProfile 
+						isUserLoggedIn={isUserLoggedIn}
+					/>
 				</PrivateRoute>
 
 				<PrivateRoute path="/plants/:id/edit">
@@ -92,7 +109,9 @@ function App() {
 				</Route>
 
 				<Route path="/signup">
-					<Signup />
+					<Signup 
+						isUserLoggedIn={isUserLoggedIn}
+					/>
 				</Route>
 
 				<Route exact path="/">
