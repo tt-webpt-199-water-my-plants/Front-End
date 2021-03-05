@@ -60,7 +60,7 @@ const StyledUserForm = styled.div`
 `;
 
 function UserForm(props) {
-	const { form, handleChange, handleSubmit, buttonText, errors } = props;
+	const { form, handleChange, handleSubmit, buttonText, errors, isUserLoggedIn } = props;
 	return (
 		<StyledUserForm>
 			<div>
@@ -112,12 +112,15 @@ function UserForm(props) {
 					</form>
 				</section>
 			</div>
-			<StyledLoginSection>
+			{
+				!isUserLoggedIn &&
+				<StyledLoginSection>
 				<p>Already have an account?</p>
 				<p>
 					<Link to="/login">Log In</Link>
 				</p>
-			</StyledLoginSection>
+				</StyledLoginSection>
+			}
 		</StyledUserForm>
 	);
 }

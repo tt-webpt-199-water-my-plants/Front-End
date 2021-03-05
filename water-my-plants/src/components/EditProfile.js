@@ -37,7 +37,8 @@ const initialFormErrors = {
 	phoneNumber: ''
   };
 
-function EditProfile() {
+function EditProfile(props) {
+	const { isUserLoggedIn } = props;
 	const [form, setForm] = useState(initialForm);
 	const [formTwo, setFormTwo] = useState([]);
 	const [formErrors, setFormErrors] = useState(initialFormErrors);
@@ -53,8 +54,9 @@ function EditProfile() {
 		axiosWithAuth()
 			.get(`/auth`)
 			.then((res) => {
-				setForm(res.data);
-				setFormTwo(res.data);
+				const currentUser = res.data.filter((user) => user.id == localStorage.getItem('id'))[0];
+				setForm({...form, ['username']: currentUser.username, ['phoneNumber']: currentUser.phoneNumber});
+				setFormTwo(currentUser);
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
@@ -101,15 +103,6 @@ function EditProfile() {
 			);
 	};
 
-	const formFilter = formTwo.filter(
-		(user) => user.id == localStorage.getItem('id')
-	);
-
-	const currentUserData = formFilter[0];
-
-	console.log('formFilter =====> ', formFilter);
-	console.log('currentUserData =====> ', currentUserData);
-
 	return (
 		<StyledEditProfile>
 			<h2>Edit Profile</h2>
@@ -119,6 +112,7 @@ function EditProfile() {
 				handleSubmit={handleSubmit}
 				buttonText="Submit"
 				errors={formErrors}
+				isUserLoggedIn={isUserLoggedIn}
 			/>
 			<Navigation />
 		</StyledEditProfile>

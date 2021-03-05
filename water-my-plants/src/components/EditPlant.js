@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 import PlantForm from './PlantForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import * as yup from 'yup';
+import FormSchemaEditPlant from '../validation/FormSchemaEditPlant';
 
 const StyledEditPlant = styled.section`
 	width: 60vw;
@@ -76,6 +78,10 @@ const StyledEditPlant = styled.section`
 	}
 	button:hover {
 		cursor: pointer;
+
+		&:disabled {
+			cursor: initial;
+		}
 	}
 `;
 
@@ -84,6 +90,7 @@ const EditPlant = (props) => {
 	const history = useHistory();
 	const { id } = useParams();
 	const plantToEdit = plants.find((plant) => plant.id == id);
+	const initialDisabled = true;
 
 	const initialState = {
 		nickname: plantToEdit.nickname,
@@ -93,10 +100,29 @@ const EditPlant = (props) => {
 		image: plantToEdit.image,
 	};
 
-	const [state, setState] = useState(initialState);
+	const initialFormErrors = {
+		nickname: '',
+		h20Frequency: '',
+		speciesName: '',
+		image: '',
+	}
 
-	const handleChange = (e) => {
-		setState({ ...state, [e.target.name]: e.target.value });
+	const [state, setState] = useState(initialState);
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
+	const [disabled, setDisabled] = useState(initialDisabled);
+
+	useEffect(() => {
+		FormSchemaEditPlant.isValid(state)
+		.then(isValid => setDisabled(!isValid))
+	}, [state])
+
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		yup.reach(FormSchemaEditPlant, name)
+		  .validate(value)
+			.then(() => setFormErrors({...formErrors, [name]: ''}))
+			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+		setState({ ...state, [name]: value })
 	};
 
 	const handleSubmit = (e) => {
@@ -135,6 +161,8 @@ const EditPlant = (props) => {
 					handleSubmit={handleSubmit}
 					handleChange={handleChange}
 					state={state}
+					errors={formErrors}
+					disabled={disabled}
 				/>
 			</StyledEditPlant>
 			<Navigation />

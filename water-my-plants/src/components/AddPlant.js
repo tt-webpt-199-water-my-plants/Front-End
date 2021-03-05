@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addNewPlant } from '../actions';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 import PlantForm from './PlantForm';
+import * as yup from 'yup';
+import FormSchemaEditPlant from '../validation/FormSchemaEditPlant';
 
 const StyledAddPlant = styled.section`
 	width:60vw;
@@ -77,40 +79,63 @@ const StyledAddPlant = styled.section`
 	}
 	button:hover {
 		cursor: pointer;
+
+		&:disabled {
+			cursor: initial;
+		}
 	}
 `
 
 const AddPlant = (props) => {
 	const { plants, setPlants } = props;
 	const history = useHistory();
+	const initialDisabled = true;
+
 	const initialState = {
 		nickname: '',
 		h20Frequency: '',
 		speciesName: '',
 		userId: localStorage.getItem('id'),
-		image: null,
+		image: '',
 	};
 
-	const [state, setState] = useState(initialState);
+	const initialFormErrors = {
+		nickname: '',
+		h20Frequency: '',
+		speciesName: '',
+		image: '',
+	}
 
-	const handleChange = (e) => {
-		setState({ ...state, [e.target.name]: e.target.value });
+	const [state, setState] = useState(initialState);
+	const [formErrors, setFormErrors] = useState(initialFormErrors);
+	const [disabled, setDisabled] = useState(initialDisabled);
+
+	useEffect(() => {
+		FormSchemaEditPlant.isValid(state)
+		.then(isValid => setDisabled(!isValid))
+	}, [state])
+
+	const handleChange = (event) => {
+		const { name, value } = event.target;
+		yup.reach(FormSchemaEditPlant, name)
+		  .validate(value)
+			.then(() => setFormErrors({...formErrors, [name]: ''}))
+			.catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+		setState({ ...state, [name]: value })
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		props.addNewPlant(state, (response) => {
-			setPlants([...plants, response])
+			setPlants([...plants, response]);
 		});
-
 		setState({
 			nickname: '',
 			h20Frequency: '',
 			speciesName: '',
-			image: null,
+			image: '',
 			userId: localStorage.getItem('id'),
 		});
-
 		history.push('/plants');
 	};
 
@@ -122,6 +147,8 @@ const AddPlant = (props) => {
 					handleSubmit={handleSubmit} 
 					handleChange={handleChange} 
 					state={state} 
+					errors={formErrors}
+					disabled={disabled}
 				/>
 			</StyledAddPlant>
 			<Navigation />

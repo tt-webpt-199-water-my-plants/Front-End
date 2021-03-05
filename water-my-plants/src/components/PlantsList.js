@@ -29,8 +29,8 @@ const PlantsList = (props) => {
 
 	return (
 		<StyledPlantsList>
-			{plants.map((plant) => {
-				return <Plant plant={plant} plants={plants} setPlants={setPlants} key={plant.id} />;
+			{plants.map((plant, index) => {
+				return <Plant plant={plant} plants={plants} setPlants={setPlants} key={index} />;
 			})}
 		</StyledPlantsList>
 	);
