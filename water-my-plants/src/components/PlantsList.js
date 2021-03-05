@@ -44,22 +44,24 @@ const StyledPlantsList = styled.div`
 const PlantsList = (props) => {
 	const { plants, setPlants } = props;
 
-	const getPlants = () => {
-		axiosWithAuth()
-			.get(
-				`https://water-my-plants-api-t199.herokuapp.com/api/plants/${localStorage.getItem(
-					'id'
-				)}`
-			)
-			.then((response) => {
-				console.log('plants data - user =====> ', response.data);
-				setPlants(response.data);
-			});
-	};
-
 	useEffect(() => {
+		const getPlants = () => {
+			axiosWithAuth()
+				.get(
+					`https://water-my-plants-api-t199.herokuapp.com/api/plants/${localStorage.getItem(
+						'id'
+					)}`
+				)
+				.then((response) => {
+					console.log(
+						'plants data - user =====> ',
+						response.data
+					);
+					setPlants(response.data);
+				});
+		};
 		getPlants();
-	}, []);
+	}, [setPlants]);
 
 	return (
 		<StyledPlantsList>
