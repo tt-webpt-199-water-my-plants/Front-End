@@ -25,19 +25,21 @@ const StyledEditProfile = styled.div`
 	}
 `;
 
-const initialForm = {
-	username: '',
-	password: '',
-	phoneNumber: '',
-};
-
-const initialFormErrors = {
-	username: '',
-	password: '',
-	phoneNumber: '',
-};
-
 function EditProfile(props) {
+	const userId = localStorage.getItem('id');
+
+	const initialForm = {
+		username: '',
+		password: '',
+		phoneNumber: '',
+	};
+
+	const initialFormErrors = {
+		username: '',
+		password: '',
+		phoneNumber: '',
+	};
+
 	const { isUserLoggedIn } = props;
 	const initialDisabled = true;
 	const [form, setForm] = useState(initialForm);
@@ -56,8 +58,6 @@ function EditProfile(props) {
 		setForm({ ...form, [name]: value });
 	};
 
-	const userId = localStorage.getItem('id');
-
 	useEffect(() => {
 		// ?? get user data and update form state with user's username, password, and phone number
 		axiosWithAuth()
@@ -66,16 +66,18 @@ function EditProfile(props) {
 				const currentUser = res.data.filter(
 					(user) => user.id === Number(userId)
 				);
+				console.log('currentUser =====> ', currentUser[0]);
 				setForm({
-					...form,
-					username: currentUser.username,
-					phoneNumber: currentUser.phoneNumber,
+					// ...form,
+					username: currentUser[0].username,
+					password: 'Enter new password',
+					phoneNumber: currentUser[0].phoneNumber,
 				});
 			})
 			.catch((err) =>
 				console.error(`unable to get user data`, err.message)
 			);
-	}, [userId, form]);
+	}, [userId]);
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -108,12 +110,14 @@ function EditProfile(props) {
 				newUserData
 			)
 			.then((res) => {
-				history.push('/');
+				history.push('/plants');
 			})
 			.catch((err) =>
 				console.error('unable to update user ', err.message)
 			);
 	};
+
+	console.log('form data: EditUser.js =====> ', form);
 
 	return (
 		<StyledEditProfile>
