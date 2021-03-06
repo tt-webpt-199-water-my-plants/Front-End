@@ -56,9 +56,6 @@ function App() {
 		localStorage.getItem('id') ? true : false
 	);
 
-	// const userName = () => {
-	// 	return localStorage.getItem('user');
-	// };
 	const [userName, setUserName] = useState([]);
 
 	const [plants, setPlants] = useState([]);

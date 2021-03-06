@@ -110,7 +110,7 @@ function UserForm(props) {
 							<label>
 								Password
 								<input
-									type="password"
+									type="text"
 									name="password"
 									value={form.password}
 									onChange={handleChange}
